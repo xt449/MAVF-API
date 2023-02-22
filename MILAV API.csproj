@@ -54,6 +54,7 @@
     <Compile Include="Device\IPowerControl.cs" />
     <Compile Include="Device\Layout\ILayout.cs" />
     <Compile Include="Device\Layout\QuadLayout.cs" />
+    <Compile Include="Device\Layout\NineLayout.cs" />
     <Compile Include="Device\Layout\SingleLayout.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
