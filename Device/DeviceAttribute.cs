@@ -3,7 +3,7 @@
 namespace MILAV.API.Device
 {
     [AttributeUsage(AttributeTargets.Class, AllowMultiple = false, Inherited = false)]
-    internal class DeviceAttribute : Attribute
+    public class DeviceAttribute : Attribute
     {
         public readonly DeviceType type;
         public readonly string id;
