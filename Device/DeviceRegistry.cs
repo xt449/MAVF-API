@@ -31,7 +31,7 @@ namespace MILAV.API.Device
                     if (type.GetConstructor(new Type[0]) != null)
                     {
                         Debug.Print("FOUND '{0}' DEVICE DEFINTION FOR ID: '{1}'", attribute.type, attribute.id);
-                        deviceTypeAndIdToType.Add((attribute.type, attribute.id), type);
+                        deviceTypeAndIdToType[(attribute.type, attribute.id)] = type;
                     }
                 }
             }
