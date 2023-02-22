@@ -2,10 +2,8 @@
 {
     public interface IPowerControl
     {
+        bool GetPower();
+
         void SetPower(bool state);
-
-        void SetPowerOff();
-
-        void SetPowerOn();
     }
 }
