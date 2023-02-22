@@ -14,7 +14,7 @@ namespace MILAV.API.Device.Layout
         {
             var thirdWidth = width / 3;
             var thirdHeight = height / 3;
-            var twoThirdWidth = thirdWidth * 2; 
+            var twoThirdWidth = thirdWidth * 2;
             var twoThirdHeight = thirdHeight * 2;
 
             return new Rectangle[]
