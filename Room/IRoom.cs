@@ -1,6 +1,6 @@
 ﻿using MILAV.API.Device;
 
-namespace MILAV.Room
+namespace MILAV.API.Room
 {
     public interface IRoom
     {

@@ -58,6 +58,7 @@
     <Compile Include="Device\Layout\SingleLayout.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Room\IRoom.cs" />
+    <Compile Include="Room\RoomManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
