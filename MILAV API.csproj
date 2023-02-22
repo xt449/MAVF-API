@@ -59,8 +59,8 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Data\MILAV Data.csproj">
-      <Project>{84935438-256f-45f6-a4e5-71ff6c1d0809}</Project>
+    <ProjectReference Include="..\MILAV Data\MILAV Data.csproj">
+      <Project>{b2459fe2-dba4-48a5-b27e-d121db1d3240}</Project>
       <Name>MILAV Data</Name>
     </ProjectReference>
   </ItemGroup>
