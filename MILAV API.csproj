@@ -45,9 +45,11 @@
     <Compile Include="Connection\IPConnection.cs" />
     <Compile Include="Connection\TCPConnection.cs" />
     <Compile Include="Device\DeviceAttribute.cs" />
+    <Compile Include="Device\DeviceRegistry.cs" />
     <Compile Include="Device\DeviceType.cs" />
     <Compile Include="Device\IChannelControl.cs" />
     <Compile Include="Device\IDevice.cs" />
+    <Compile Include="Device\IDeviceConverter.cs" />
     <Compile Include="Device\ILayoutControl.cs" />
     <Compile Include="Device\IPowerControl.cs" />
     <Compile Include="Device\Layout\ILayout.cs" />

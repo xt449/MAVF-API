@@ -1,8 +1,9 @@
 ﻿using MILAV.API.Connection;
 using Newtonsoft.Json;
 
-namespace MILAV
+namespace MILAV.API.Device
 {
+    [JsonConverter(typeof(IDeviceConverter))]
     public interface IDevice
     {
         [JsonProperty("room")]

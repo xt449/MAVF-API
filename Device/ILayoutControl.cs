@@ -1,6 +1,6 @@
 ﻿using MILAV.API.Device.Layout;
 
-namespace AV_Device_API
+namespace MILAV.API.Device
 {
     public interface ILayoutControl
     {
