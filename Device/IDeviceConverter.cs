@@ -20,8 +20,8 @@ namespace MILAV.API.Device
                 // Ensure that the DeviceRegistry has been initialized before accessing it
                 DeviceRegistry.Initialize();
 
-                // Get the type device type that matches the "type" and "id" properties of the JSON object
-                if (DeviceRegistry.TryGet((DeviceType)Enum.Parse(typeof(DeviceType), (string)jObject["type"], true), (string)jObject["id"], out Type type))
+                // Get the type device type that matches the "type" and "driver" properties of the JSON object
+                if (DeviceRegistry.TryGet((DeviceType)Enum.Parse(typeof(DeviceType), (string)jObject["type"], true), (string)jObject["driver"], out Type type))
                 {
                     // Use the default deserializer for the specific type found
                     return JsonConvert.DeserializeObject(token.ToString(Formatting.None), type);
@@ -39,8 +39,8 @@ namespace MILAV.API.Device
             var attribute = (DeviceAttribute)Attribute.GetCustomAttribute(value.GetType(), typeof(DeviceAttribute));
             // Add the "type" property with the `type` from the DeviceAttribute which will be used for deserialization
             token["type"] = attribute.type.ToString();
-            // Add the "id" property with the `id` from the DeviceAttribute which will be used for deserialization
-            token["id"] = attribute.id;
+            // Add the "driver" property with the `driver` from the DeviceAttribute which will be used for deserialization
+            token["driver"] = attribute.driver;
             token.WriteTo(writer);
         }
     }

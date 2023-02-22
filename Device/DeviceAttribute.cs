@@ -6,12 +6,12 @@ namespace MILAV.API.Device
     public class DeviceAttribute : Attribute
     {
         public readonly DeviceType type;
-        public readonly string id;
+        public readonly string driver;
 
-        public DeviceAttribute(DeviceType type, string id)
+        public DeviceAttribute(DeviceType type, string driver)
         {
             this.type = type;
-            this.id = id;
+            this.driver = driver;
         }
     }
 }

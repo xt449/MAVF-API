@@ -30,8 +30,8 @@ namespace MILAV.API.Device
                     // This is probably not necessary, but JSON deserialization sometimes behaves weirdly with contructors
                     if (type.GetConstructor(new Type[0]) != null)
                     {
-                        Debug.Print("FOUND '{0}' DEVICE DEFINTION FOR ID: '{1}'", attribute.type, attribute.id);
-                        deviceTypeAndIdToType[(attribute.type, attribute.id)] = type;
+                        Debug.Print("FOUND '{0}' DEVICE DEFINTION FOR ID: '{1}'", attribute.type, attribute.driver);
+                        deviceTypeAndIdToType[(attribute.type, attribute.driver)] = type;
                     }
                 }
             }
