@@ -44,9 +44,6 @@
     <Compile Include="Connection\IConnectionConverter.cs" />
     <Compile Include="Connection\IPConnection.cs" />
     <Compile Include="Connection\TCPConnection.cs" />
-    <Compile Include="Data\Point2D.cs" />
-    <Compile Include="Data\Rectangle.cs" />
-    <Compile Include="Data\SerialParity.cs" />
     <Compile Include="Device\DeviceAttribute.cs" />
     <Compile Include="Device\DeviceType.cs" />
     <Compile Include="Device\IChannelControl.cs" />
@@ -60,6 +57,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Data\MILAV Data.csproj">
+      <Project>{84935438-256f-45f6-a4e5-71ff6c1d0809}</Project>
+      <Name>MILAV Data</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
