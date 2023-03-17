@@ -53,6 +53,10 @@
     <Compile Include="Device\ILayoutControl.cs" />
     <Compile Include="Device\IPowerControl.cs" />
     <Compile Include="Device\Layout\ILayout.cs" />
+    <Compile Include="Device\Layout\SixBigBottomLeftLayout.cs" />
+    <Compile Include="Device\Layout\SixBigBottomRightLayout.cs" />
+    <Compile Include="Device\Layout\SixBigTopRightLayout.cs" />
+    <Compile Include="Device\Layout\SixBigTopLeftLayout.cs" />
     <Compile Include="Device\Layout\QuadLayout.cs" />
     <Compile Include="Device\Layout\NineLayout.cs" />
     <Compile Include="Device\Layout\SingleLayout.cs" />
