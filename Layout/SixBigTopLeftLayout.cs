@@ -1,13 +1,13 @@
 ﻿using MILAV.Data;
 
-namespace MILAV.API.Device.Layout
+namespace MILAV.API.Layout
 {
-    public class SixBigBottomRightLayout : ILayout
+    public class SixBigTopLeftLayout : ILayout
     {
-        public static readonly SixBigBottomRightLayout Instance = new SixBigBottomRightLayout();
+        public static readonly SixBigTopLeftLayout Instance = new SixBigTopLeftLayout();
 
-        private SixBigBottomRightLayout() { }
-        
+        private SixBigTopLeftLayout() { }
+
         public int Sections => 6;
 
         public Rectangle[] GetSectionDimensions(int width, int height)
@@ -19,12 +19,12 @@ namespace MILAV.API.Device.Layout
 
             return new Rectangle[]
             {
-                new Rectangle(0, 0, thirdWidth, thirdHeight),
-                new Rectangle(thirdWidth, 0, thirdWidth, thirdHeight),
+                new Rectangle(0, 0, twoThirdWidth, twoThirdHeight),
                 new Rectangle(twoThirdWidth, 0, thirdWidth, thirdHeight),
-                new Rectangle(0, thirdHeight, thirdWidth, thirdHeight),
+                new Rectangle(twoThirdWidth, thirdHeight, thirdWidth, thirdHeight),
                 new Rectangle(0, twoThirdHeight, thirdWidth, thirdHeight),
-                new Rectangle(thirdWidth, thirdHeight, twoThirdWidth, twoThirdHeight),
+                new Rectangle(thirdWidth, twoThirdHeight, thirdWidth, thirdHeight),
+                new Rectangle(twoThirdWidth, twoThirdHeight, thirdWidth, thirdHeight),
             };
         }
     }

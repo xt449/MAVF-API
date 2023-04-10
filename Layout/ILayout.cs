@@ -1,6 +1,6 @@
 ﻿using MILAV.Data;
 
-namespace MILAV.API.Device.Layout
+namespace MILAV.API.Layout
 {
     public interface ILayout
     {

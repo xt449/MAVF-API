@@ -1,4 +1,4 @@
-﻿using MILAV.API.Device.Layout;
+﻿using MILAV.API.Layout;
 
 namespace MILAV.API.Device
 {
