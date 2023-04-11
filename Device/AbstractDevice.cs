@@ -9,22 +9,22 @@ namespace MILAV.API.Device
     public abstract class AbstractDevice
     {
         [JsonProperty("driver")]
-        public string Driver { get; } //=> ((DeviceAttribute?)Attribute.GetCustomAttribute(GetType(), typeof(DeviceAttribute)))?.driver ?? "unknown";
+        public string Driver => ((DeviceAttribute?)Attribute.GetCustomAttribute(GetType(), typeof(DeviceAttribute)))?.driver ?? "unknown";
 
-        [JsonProperty("id")]
-        public string Id { get; private set; }
+        [JsonProperty]
+        public readonly string id;
 
-        [JsonProperty("ip")]
-        public string Ip { get; private set; }
+        [JsonProperty]
+        public readonly string ip;
 
-        [JsonProperty("port")]
-        public int Port { get; private set; }
+        [JsonProperty]
+        public readonly int port;
 
-        [JsonProperty("protocol")]
-        public Protocol Protocol { get; private set; }
+        [JsonProperty]
+        public readonly Protocol protocol;
 
-        [JsonProperty("room")]
-        public string Room { get; private set; }
+        [JsonProperty]
+        public readonly string room;
 
         /// <summary>
         /// Used to determine which rooms this device can send control actions to
@@ -41,11 +41,11 @@ namespace MILAV.API.Device
 
         public void InnerValidate()
         {
-            if (Id == null) throw new JsonException("Device was deserialized with null 'id'");
-            if (Ip == null) throw new JsonException("Device was deserialized with null 'ip'");
-            if (Port == null) throw new JsonException("Device was deserialized with null 'port'");
-            if (Protocol == null) throw new JsonException("Device was deserialized with null 'protocol'");
-            if (Room == null) throw new JsonException("Device was deserialized with null 'room'");
+            if (id == null) throw new JsonException("Device was deserialized with null 'id'");
+            if (ip == null) throw new JsonException("Device was deserialized with null 'ip'");
+            if (port == null) throw new JsonException("Device was deserialized with null 'port'");
+            if (protocol == null) throw new JsonException("Device was deserialized with null 'protocol'");
+            if (room == null) throw new JsonException("Device was deserialized with null 'room'");
             if (States == null) throw new JsonException("Device was deserialized with null 'states'");
 
             Validate();
@@ -66,37 +66,37 @@ namespace MILAV.API.Device
                 return;
             }
 
-            switch (Protocol)
+            switch (protocol)
             {
                 case Protocol.TCP:
-                    Connection = new TCPConnection(Ip, Port);
+                    Connection = new TCPConnection(ip, port);
                     break;
                 case Protocol.TELNET:
-                    Connection = new TelnetConnection(Ip, Port);
+                    Connection = new TelnetConnection(ip, port);
                     break;
                 case Protocol.HTTP:
-                    Connection = new HttpConnection(Ip, Port);
+                    Connection = new HttpConnection(ip, port);
                     break;
                 case Protocol.WEBSOCKET:
-                    Connection = new WebSocketConnection(Ip, Port);
+                    Connection = new WebSocketConnection(ip, port);
                     break;
                 case Protocol.SSH:
-                    Connection = new SSHConnection(Ip, Port);
+                    Connection = new SSHConnection(ip, port);
                     break;
                 case Protocol.UDP:
-                    Connection = new UDPConnection(Ip, Port);
+                    Connection = new UDPConnection(ip, port);
                     break;
             }
         }
 
         public void SetControlState(string nextState)
         {
-            State = States.FirstOrDefault(cs => cs.Id == nextState);
+            State = States.FirstOrDefault(cs => cs.id == nextState);
         }
 
         public bool CanControlDevice(AbstractDevice abstractDevice)
         {
-            return State?.Rooms.Contains(abstractDevice.Room) ?? false;
+            return State?.rooms.Contains(abstractDevice.room) ?? false;
         }
     }
 

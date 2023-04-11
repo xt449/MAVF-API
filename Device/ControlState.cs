@@ -5,10 +5,10 @@ namespace MILAV.API.Device
     [JsonObject(MemberSerialization.OptIn)]
     public class ControlState
     {
-        [JsonProperty("id")]
-        public string Id { get; }
+        [JsonProperty]
+        public readonly string id;
 
-        [JsonProperty("rooms")]
-        public string[] Rooms { get; }
+        [JsonProperty]
+        public readonly string[] rooms;
     }
 }
