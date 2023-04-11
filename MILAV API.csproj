@@ -19,7 +19,6 @@
     <Folder Include="Device\TouchPanel\" />
     <Folder Include="Device\VTC\" />
     <Folder Include="Device\VideoController\VideoWall\" />
-    <Folder Include="Device\Video\" />
   </ItemGroup>
 
 </Project>
