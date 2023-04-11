@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace MILAV.API.Connection
 {
@@ -17,7 +18,7 @@ namespace MILAV.API.Connection
 
         public override object? ReadJson(JsonReader reader, Type objectType, object? existingValue, JsonSerializer serializer)
         {
-            var value = reader.ReadAsString();
+            var value = (string)JToken.ReadFrom(reader);
             return value == null ? null : Enum.Parse(typeof(Protocol), value, true);
         }
 
