@@ -2,13 +2,14 @@
 
 namespace MILAV.API.Room
 {
+    [Obsolete("Rooms are just labels")]
     public interface IRoom
     {
         string Id { get; }
         string Name { get; }
 
-        bool TryGetDevice(string id, out IDevice device);
+        bool TryGetDevice(string id, out AbstractDevice device);
 
-        IDevice GetDevice(string id);
+        AbstractDevice GetDevice(string id);
     }
 }

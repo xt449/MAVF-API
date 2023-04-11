@@ -1,7 +1,6 @@
-﻿using System.Collections.Generic;
-
-namespace MILAV.API.Room
+﻿namespace MILAV.API.Room
 {
+    [Obsolete("Rooms are just labels")]
     public class RoomManager
     {
         private readonly Dictionary<string, IRoom> rooms = new Dictionary<string, IRoom>();
