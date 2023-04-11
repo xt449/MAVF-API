@@ -15,13 +15,13 @@ namespace MILAV.API.Device
         public string Id { get; }
 
         [JsonProperty("ip")]
-        public string? Ip { get; }
+        public string Ip { get; }
 
         [JsonProperty("port")]
-        public int? Port { get; }
+        public int Port { get; }
 
         [JsonProperty("protocol")]
-        public Protocol? Protocol { get; }
+        public Protocol Protocol { get; }
 
         [JsonProperty("room")]
         public string Room { get; }
@@ -37,30 +37,24 @@ namespace MILAV.API.Device
 
         public void InitializeConnection()
         {
-            if (Ip == null || Port == null || Protocol == null)
-            {
-                Connection = null;
-                return;
-            }
-
             switch (Protocol)
             {
-                case API.Connection.Protocol.TCP:
+                case Protocol.TCP:
                     Connection = new TCPConnection(Ip, (int)Port);
                     break;
-                case API.Connection.Protocol.TELNET:
+                case Protocol.TELNET:
                     Connection = new TelnetConnection(Ip, (int)Port);
                     break;
-                case API.Connection.Protocol.HTTP:
+                case Protocol.HTTP:
                     Connection = new HttpConnection(Ip, (int)Port);
                     break;
-                case API.Connection.Protocol.WEBSOCKET:
+                case Protocol.WEBSOCKET:
                     Connection = new WebSocketConnection(Ip, (int)Port);
                     break;
-                case API.Connection.Protocol.SSH:
+                case Protocol.SSH:
                     Connection = new SSHConnection(Ip, (int)Port);
                     break;
-                case API.Connection.Protocol.UDP:
+                case Protocol.UDP:
                     Connection = new UDPConnection(Ip, (int)Port);
                     break;
             }
@@ -79,8 +73,7 @@ namespace MILAV.API.Device
 
         public override object? ReadJson(JsonReader reader, Type objectType, object? existingValue, JsonSerializer serializer)
         {
-            var token = JToken.ReadFrom(reader);
-            if (token is JObject jObject)
+            if (JToken.ReadFrom(reader) is JObject jObject)
             {
                 // Ensure that the DeviceRegistry has been initialized before accessing it
                 DeviceRegistry.Initialize();
@@ -88,12 +81,16 @@ namespace MILAV.API.Device
                 // Get the type device type that matches the "type" and "driver" properties of the JSON object
                 if (DeviceRegistry.TryGet((string?)jObject["driver"], out Type? type))
                 {
-                    // Use the default deserializer for the specific type found
-                    return type == null ? null : JsonConvert.DeserializeObject(token.ToString(Formatting.None), type);
+                    // Call the default "creator" used by Newtonsoft when deserializing
+                    var value = serializer.ContractResolver.ResolveContract(type).DefaultCreator();
+                    // Populate the default value with the values from the jObject
+                    serializer.Populate(jObject.CreateReader(), value);
+
+                    return value;
                 }
             }
 
-            // Fail when the token is not a JObject
+            // Return null when the token is not a JObject or when driver id is not valid
             return null;
         }
 
