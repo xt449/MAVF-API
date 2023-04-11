@@ -9,28 +9,62 @@ namespace MILAV.API.Device
     public abstract class AbstractDevice
     {
         [JsonProperty("id")]
-        string Id { get; }
+        public string Id { get; }
 
         [JsonProperty("driver")]
-        string Driver { get; }
+        public string Driver { get; }
 
         [JsonProperty("ip")]
-        string Ip { get; }
+        public string? Ip { get; }
 
         [JsonProperty("port")]
-        int Port { get; }
+        public int? Port { get; }
 
         [JsonProperty("protocol")]
-        Protocol Protocol { get; }
+        public Protocol? Protocol { get; }
 
         [JsonProperty("room")]
-        string Room { get; }
+        public string Room { get; }
 
         [JsonProperty("states")]
-        ControlState[] States { get; }
+        public ControlState[] States { get; }
 
         [JsonIgnore]
-        ControlState? State { get; set; }
+        public ControlState? State { get; set; }
+
+        [JsonIgnore]
+        public IPConnection? Connection { get; private set; }
+
+        public void InitializeConnection()
+        {
+            if (Ip == null || Port == null || Protocol == null)
+            {
+                Connection = null;
+                return;
+            }
+
+            switch (Protocol)
+            {
+                case API.Connection.Protocol.TCP:
+                    Connection = new TCPConnection(Ip, (int)Port);
+                    break;
+                case API.Connection.Protocol.TELNET:
+                    Connection = new TelnetConnection(Ip, (int)Port);
+                    break;
+                case API.Connection.Protocol.HTTP:
+                    Connection = new HttpConnection(Ip, (int)Port);
+                    break;
+                case API.Connection.Protocol.WEBSOCKET:
+                    Connection = new WebSocketConnection(Ip, (int)Port);
+                    break;
+                case API.Connection.Protocol.SSH:
+                    Connection = new SSHConnection(Ip, (int)Port);
+                    break;
+                case API.Connection.Protocol.UDP:
+                    Connection = new UDPConnection(Ip, (int)Port);
+                    break;
+            }
+        }
     }
 
     public class AbstractDeviceConverter : JsonConverter
