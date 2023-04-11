@@ -15,4 +15,10 @@
     <ProjectReference Include="..\MILAV Data\MILAV Data.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Device\VTC\" />
+    <Folder Include="Device\VideoController\VideoWall\" />
+    <Folder Include="Device\Video\" />
+  </ItemGroup>
+
 </Project>

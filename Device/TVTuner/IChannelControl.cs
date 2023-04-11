@@ -1,4 +1,4 @@
-﻿namespace MILAV.API.Device
+﻿namespace MILAV.API.Device.TVTuner
 {
     public interface IChannelControl
     {
