@@ -1,8 +1,6 @@
-﻿using System;
-
-namespace MILAV.API.Connection
+﻿namespace MILAV.API.Connection
 {
-    public abstract class IPConnection : IConnection, IDisposable
+    public abstract class IPConnection : IDisposable
     {
         public readonly string ip;
         public readonly int port;
@@ -12,10 +10,12 @@ namespace MILAV.API.Connection
             this.ip = ip;
             this.port = port;
         }
-
-        public abstract bool Connect();
-        public abstract void Dispose();
         public abstract byte[] ReadBytes(int maxLength);
         public abstract void WriteBytes(byte[] buffer, int offset, int length);
+
+        public abstract bool Connect();
+        public abstract void Disconnect();
+
+        public abstract void Dispose();
     }
 }

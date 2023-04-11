@@ -1,11 +1,8 @@
-﻿using Newtonsoft.Json;
-using System;
-using System.Linq;
-using System.Net.Sockets;
+﻿using System.Net.Sockets;
 
 namespace MILAV.API.Connection
 {
-    [JsonObject("tcp")]
+    //[JsonObject("tcp")]
     public class TCPConnection : IPConnection
     {
         protected readonly TcpClient client;
@@ -13,18 +10,6 @@ namespace MILAV.API.Connection
         public TCPConnection(string ip, int port) : base(ip, port)
         {
             client = new TcpClient();
-        }
-
-        public override bool Connect()
-        {
-            client.Connect(ip, port);
-            return client.Connected;
-        }
-
-        public override void Dispose()
-        {
-            client.Dispose();
-            GC.SuppressFinalize(this);
         }
 
         public override byte[] ReadBytes(int maxLength)
@@ -37,6 +22,23 @@ namespace MILAV.API.Connection
         public override void WriteBytes(byte[] buffer, int offset, int length)
         {
             client.GetStream().Write(buffer, offset, length);
+        }
+
+        public override bool Connect()
+        {
+            client.Connect(ip, port);
+            return client.Connected;
+        }
+
+        public override void Disconnect()
+        {
+            client.Close();
+        }
+
+        public override void Dispose()
+        {
+            client.Dispose();
+            GC.SuppressFinalize(this);
         }
     }
 }
