@@ -9,55 +9,68 @@ namespace MILAV.API.Device
     public abstract class AbstractDevice
     {
         [JsonProperty("driver")]
-        public string Driver => ((DeviceAttribute?)Attribute.GetCustomAttribute(GetType(), typeof(DeviceAttribute)))?.driver ?? "unknown";
+        public string Driver { get; } //=> ((DeviceAttribute?)Attribute.GetCustomAttribute(GetType(), typeof(DeviceAttribute)))?.driver ?? "unknown";
 
         [JsonProperty("id")]
-        public string Id { get; }
+        public string Id { get; private set; }
 
         [JsonProperty("ip")]
-        public string Ip { get; }
+        public string Ip { get; private set; }
 
         [JsonProperty("port")]
-        public int Port { get; }
+        public int Port { get; private set; }
 
         [JsonProperty("protocol")]
-        public Protocol Protocol { get; }
+        public Protocol Protocol { get; private set; }
 
         [JsonProperty("room")]
-        public string Room { get; }
+        public string Room { get; private set; }
 
         [JsonProperty("states")]
-        public ControlState[] States { get; }
+        public ControlState[] States { get; private set; }
 
-        [JsonIgnore]
-        public ControlState? State { get; set; }
+        public ControlState? State { get; private set; }
 
-        [JsonIgnore]
         public IPConnection? Connection { get; private set; }
+
+        public void Validate()
+        {
+            if (Id == null) throw new JsonException("Device was deserialized with null 'id'");
+            if (Ip == null) throw new JsonException("Device was deserialized with null 'ip'");
+            if (Port == null) throw new JsonException("Device was deserialized with null 'port'");
+            if (Protocol == null) throw new JsonException("Device was deserialized with null 'protocol'");
+            if (Room == null) throw new JsonException("Device was deserialized with null 'room'");
+            if (States == null) throw new JsonException("Device was deserialized with null 'states'");
+        }
 
         public void InitializeConnection()
         {
             switch (Protocol)
             {
                 case Protocol.TCP:
-                    Connection = new TCPConnection(Ip, (int)Port);
+                    Connection = new TCPConnection(Ip, Port);
                     break;
                 case Protocol.TELNET:
-                    Connection = new TelnetConnection(Ip, (int)Port);
+                    Connection = new TelnetConnection(Ip, Port);
                     break;
                 case Protocol.HTTP:
-                    Connection = new HttpConnection(Ip, (int)Port);
+                    Connection = new HttpConnection(Ip, Port);
                     break;
                 case Protocol.WEBSOCKET:
-                    Connection = new WebSocketConnection(Ip, (int)Port);
+                    Connection = new WebSocketConnection(Ip, Port);
                     break;
                 case Protocol.SSH:
-                    Connection = new SSHConnection(Ip, (int)Port);
+                    Connection = new SSHConnection(Ip, Port);
                     break;
                 case Protocol.UDP:
-                    Connection = new UDPConnection(Ip, (int)Port);
+                    Connection = new UDPConnection(Ip, Port);
                     break;
             }
+        }
+
+        public void SetControlState(string nextState)
+        {
+            State = States.FirstOrDefault(cs => cs.Id == nextState);
         }
     }
 
@@ -85,6 +98,9 @@ namespace MILAV.API.Device
                     var value = serializer.ContractResolver.ResolveContract(type).DefaultCreator();
                     // Populate the default value with the values from the jObject
                     serializer.Populate(jObject.CreateReader(), value);
+
+                    // Assert
+                    ((AbstractDevice)value).Validate();
 
                     return value;
                 }
