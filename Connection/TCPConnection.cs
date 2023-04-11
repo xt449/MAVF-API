@@ -7,6 +7,8 @@ namespace MILAV.API.Connection
     {
         protected readonly TcpClient client;
 
+        public bool Connected => client.Connected;
+
         public TCPConnection(string ip, int port) : base(ip, port)
         {
             client = new TcpClient();
@@ -26,6 +28,11 @@ namespace MILAV.API.Connection
 
         public override bool Connect()
         {
+            if(client.Connected)
+            {
+                return true;
+            }
+
             client.Connect(ip, port);
             return client.Connected;
         }
