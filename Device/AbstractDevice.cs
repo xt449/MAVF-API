@@ -60,7 +60,7 @@ namespace MILAV.API.Device
         /// </summary>
         private void InitializeConnection()
         {
-            if(Connection != null)
+            if (Connection != null)
             {
                 // Return if already initialized
                 return;

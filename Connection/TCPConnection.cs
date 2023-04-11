@@ -28,7 +28,7 @@ namespace MILAV.API.Connection
 
         public override bool Connect()
         {
-            if(client.Connected)
+            if (client.Connected)
             {
                 return true;
             }

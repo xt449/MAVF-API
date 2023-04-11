@@ -15,7 +15,7 @@ namespace MILAV.API.Connection
 
         public abstract byte[] ReadBytes(int maxLength = 4096);
 
-        public  string ReadASCII(int maxLength = 4096)
+        public string ReadASCII(int maxLength = 4096)
         {
             var data = ReadBytes(maxLength);
             return Encoding.ASCII.GetString(data, 0, data.Length);
