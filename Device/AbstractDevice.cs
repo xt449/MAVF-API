@@ -8,11 +8,11 @@ namespace MILAV.API.Device
     [JsonObject(MemberSerialization.OptIn)]
     public abstract class AbstractDevice
     {
+        [JsonProperty("driver")]
+        public string Driver => ((DeviceAttribute?)Attribute.GetCustomAttribute(GetType(), typeof(DeviceAttribute)))?.driver ?? "unknown";
+
         [JsonProperty("id")]
         public string Id { get; }
-
-        [JsonProperty("driver")]
-        public string Driver { get; }
 
         [JsonProperty("ip")]
         public string? Ip { get; }
@@ -69,6 +69,8 @@ namespace MILAV.API.Device
 
     public class AbstractDeviceConverter : JsonConverter
     {
+        public override bool CanWrite => false;
+
         public override bool CanConvert(Type objectType)
         {
             // True for types that are castable to IDevice and have the DeviceAttribute
@@ -97,17 +99,7 @@ namespace MILAV.API.Device
 
         public override void WriteJson(JsonWriter writer, object? value, JsonSerializer serializer)
         {
-            if (value == null)
-            {
-                writer.WriteNull();
-                return;
-            }
-
-            // Get the basic JSON object from the value
-            var token = JObject.FromObject(value);
-            // Add the "driver" property from the `driver` field in the DeviceAttribute which will be used for deserialization
-            token["driver"] = ((DeviceAttribute?)Attribute.GetCustomAttribute(value.GetType(), typeof(DeviceAttribute)))?.driver;
-            token.WriteTo(writer);
+            // Use default serialization
         }
     }
 }
