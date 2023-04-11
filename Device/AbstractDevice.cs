@@ -26,14 +26,20 @@ namespace MILAV.API.Device
         [JsonProperty("room")]
         public string Room { get; private set; }
 
+        /// <summary>
+        /// Used to determine which rooms this device can send control actions to
+        /// </summary>
         [JsonProperty("states")]
         public ControlState[] States { get; private set; }
 
+        /// <summary>
+        /// Used to determine which rooms this device can send control actions to
+        /// </summary>
         public ControlState? State { get; private set; }
 
         public IPConnection? Connection { get; private set; }
 
-        public void Validate()
+        public void InnerValidate()
         {
             if (Id == null) throw new JsonException("Device was deserialized with null 'id'");
             if (Ip == null) throw new JsonException("Device was deserialized with null 'ip'");
@@ -41,10 +47,25 @@ namespace MILAV.API.Device
             if (Protocol == null) throw new JsonException("Device was deserialized with null 'protocol'");
             if (Room == null) throw new JsonException("Device was deserialized with null 'room'");
             if (States == null) throw new JsonException("Device was deserialized with null 'states'");
+
+            Validate();
+
+            InitializeConnection();
         }
 
-        public void InitializeConnection()
+        public virtual void Validate() { }
+
+        /// <summary>
+        /// Called after immdiately Validate to ensure the Connection property is never null
+        /// </summary>
+        private void InitializeConnection()
         {
+            if(Connection != null)
+            {
+                // Return if already initialized
+                return;
+            }
+
             switch (Protocol)
             {
                 case Protocol.TCP:
@@ -71,6 +92,11 @@ namespace MILAV.API.Device
         public void SetControlState(string nextState)
         {
             State = States.FirstOrDefault(cs => cs.Id == nextState);
+        }
+
+        public bool CanControlDevice(AbstractDevice abstractDevice)
+        {
+            return State?.Rooms.Contains(abstractDevice.Room) ?? false;
         }
     }
 
@@ -100,7 +126,7 @@ namespace MILAV.API.Device
                     serializer.Populate(jObject.CreateReader(), value);
 
                     // Assert
-                    ((AbstractDevice)value).Validate();
+                    ((AbstractDevice)value).InnerValidate();
 
                     return value;
                 }
