@@ -1,6 +1,6 @@
 ﻿namespace MILAV.API
 {
-    public interface ClientAPI
+    public interface IClientAPI
     {
         public void AckSetControlState(string state);
     }
