@@ -16,7 +16,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Device\VTC\" />
+    <Folder Include="Device\Video\MultiViewer\" />
     <Folder Include="Device\Video\VideoWall\" />
   </ItemGroup>
 
