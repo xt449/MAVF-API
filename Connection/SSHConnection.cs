@@ -21,7 +21,7 @@
             throw new NotImplementedException();
         }
 
-        public override byte[] ReadBytes(int maxLength)
+        public override byte[] ReadBytes(int maxLength = 4096)
         {
             throw new NotImplementedException();
         }

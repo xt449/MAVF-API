@@ -14,7 +14,7 @@ namespace MILAV.API.Connection
             client = new TcpClient();
         }
 
-        public override byte[] ReadBytes(int maxLength)
+        public override byte[] ReadBytes(int maxLength = 4096)
         {
             byte[] buffer = new byte[maxLength];
             client.GetStream().Read(buffer, 0, maxLength);
