@@ -8,19 +8,19 @@ namespace MILAV.API.Device
     [JsonObject(MemberSerialization.OptIn)]
     public abstract class AbstractDevice
     {
-        [JsonProperty("driver")]
-        public string Driver => ((DeviceAttribute?)Attribute.GetCustomAttribute(GetType(), typeof(DeviceAttribute)))?.driver ?? "unknown";
+        [JsonProperty("driver", Required = Required.Default)]
+        private string Driver => ((DeviceAttribute?)Attribute.GetCustomAttribute(GetType(), typeof(DeviceAttribute)))?.driver ?? "unknown";
 
-        [JsonProperty]
+        [JsonProperty(Required = Required.DisallowNull)]
         public readonly string id;
 
-        [JsonProperty]
+        [JsonProperty(Required = Required.DisallowNull)]
         public readonly string ip;
 
-        [JsonProperty]
+        [JsonProperty(Required = Required.DisallowNull)]
         public readonly int port;
 
-        [JsonProperty]
+        [JsonProperty(Required = Required.DisallowNull)]
         public readonly Protocol protocol;
 
         [JsonProperty]
@@ -41,31 +41,9 @@ namespace MILAV.API.Device
 
         public void InnerValidate()
         {
-            if (id == null) throw new JsonException("Device was deserialized with null 'id'");
-            if (ip == null) throw new JsonException("Device was deserialized with null 'ip'");
-            if (port == null) throw new JsonException("Device was deserialized with null 'port'");
-            if (protocol == null) throw new JsonException("Device was deserialized with null 'protocol'");
-            if (room == null) throw new JsonException("Device was deserialized with null 'room'");
-            if (States == null) throw new JsonException("Device was deserialized with null 'states'");
-
-            Validate();
-
-            InitializeConnection();
-        }
-
-        public virtual void Validate() { }
-
-        /// <summary>
-        /// Called after immdiately Validate to ensure the Connection property is never null
-        /// </summary>
-        private void InitializeConnection()
-        {
-            if (Connection != null)
+            // Only if Connection not yet initialized
+            if (Connection == null)
             {
-                // Return if already initialized
-                return;
-            }
-
             switch (protocol)
             {
                 case Protocol.TCP:
@@ -127,6 +105,9 @@ namespace MILAV.API.Device
 
                     // Assert
                     ((AbstractDevice)value).InnerValidate();
+
+                    // Finish initialization of device
+                    value.Initialize();
 
                     return value;
                 }
