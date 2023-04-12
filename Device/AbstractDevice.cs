@@ -23,58 +23,43 @@ namespace MILAV.API.Device
         [JsonProperty(Required = Required.DisallowNull)]
         public readonly Protocol protocol;
 
-        [JsonProperty]
-        public readonly string room;
+        // Nullable and not required
+        [JsonProperty(Required = Required.Default)]
+        public readonly Input[]? inputs;
 
-        /// <summary>
-        /// Used to determine which rooms this device can send control actions to
-        /// </summary>
-        [JsonProperty("states")]
-        public ControlState[] States { get; private set; }
-
-        /// <summary>
-        /// Used to determine which rooms this device can send control actions to
-        /// </summary>
-        public ControlState? State { get; private set; }
+        // Nullable and not required
+        [JsonProperty(Required = Required.Default)]
+        public readonly Output[]? outputs;
 
         public IPConnection? Connection { get; private set; }
 
-        public void InnerValidate()
+        public void Initialize()
         {
             // Only if Connection not yet initialized
             if (Connection == null)
             {
-            switch (protocol)
-            {
-                case Protocol.TCP:
-                    Connection = new TCPConnection(ip, port);
-                    break;
-                case Protocol.TELNET:
-                    Connection = new TelnetConnection(ip, port);
-                    break;
-                case Protocol.HTTP:
-                    Connection = new HttpConnection(ip, port);
-                    break;
-                case Protocol.WEBSOCKET:
-                    Connection = new WebSocketConnection(ip, port);
-                    break;
-                case Protocol.SSH:
-                    Connection = new SSHConnection(ip, port);
-                    break;
-                case Protocol.UDP:
-                    Connection = new UDPConnection(ip, port);
-                    break;
+                switch (protocol)
+                {
+                    case Protocol.TCP:
+                        Connection = new TCPConnection(ip, port);
+                        break;
+                    case Protocol.TELNET:
+                        Connection = new TelnetConnection(ip, port);
+                        break;
+                    case Protocol.HTTP:
+                        Connection = new HttpConnection(ip, port);
+                        break;
+                    case Protocol.WEBSOCKET:
+                        Connection = new WebSocketConnection(ip, port);
+                        break;
+                    case Protocol.SSH:
+                        Connection = new SSHConnection(ip, port);
+                        break;
+                    case Protocol.UDP:
+                        Connection = new UDPConnection(ip, port);
+                        break;
+                }
             }
-        }
-
-        public void SetControlState(string nextState)
-        {
-            State = States.FirstOrDefault(cs => cs.id == nextState);
-        }
-
-        public bool CanControlDevice(AbstractDevice abstractDevice)
-        {
-            return State?.rooms.Contains(abstractDevice.room) ?? false;
         }
     }
 
@@ -99,12 +84,21 @@ namespace MILAV.API.Device
                 if (DeviceRegistry.TryGet((string?)jObject["driver"], out Type? type))
                 {
                     // Call the default "creator" used by Newtonsoft when deserializing
-                    var value = serializer.ContractResolver.ResolveContract(type).DefaultCreator();
-                    // Populate the default value with the values from the jObject
-                    serializer.Populate(jObject.CreateReader(), value);
+                    var value = (AbstractDevice)serializer.ContractResolver.ResolveContract(type).DefaultCreator();
 
-                    // Assert
-                    ((AbstractDevice)value).InnerValidate();
+                    // Not thread safe :(
+                    lock (Configuration.LOCK)
+                    {
+                        // Add InputConverter for this device instance
+                        var inputConveter = new InputConverter(value);
+                        serializer.Converters.Add(inputConveter);
+
+                        // Populate the default value with the values from the jObject
+                        serializer.Populate(jObject.CreateReader(), value);
+
+                        // Remove InputConverter for this device instance
+                        serializer.Converters.Remove(inputConveter);
+                    }
 
                     // Finish initialization of device
                     value.Initialize();
