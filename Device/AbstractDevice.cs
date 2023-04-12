@@ -23,21 +23,20 @@ namespace MILAV.API.Device
         [JsonProperty(Required = Required.DisallowNull)]
         public readonly Protocol protocol;
 
-        // Nullable and not required
-        [JsonProperty(Required = Required.Default)]
-        public readonly Input[]? inputs;
+        public Input[] Inputs { get; private set; }
 
-        // Nullable and not required
-        [JsonProperty(Required = Required.Default)]
-        public readonly Output[]? outputs;
+        public Output[] Outputs { get; private set; }
 
-        public IPConnection? Connection { get; private set; }
+        public IPConnection Connection { get; private set; }
 
-        public void Initialize()
+        public void Initialize(Input[] inputs, Output[] outputs)
         {
             // Only if Connection not yet initialized
             if (Connection == null)
             {
+                this.Inputs = inputs;
+                this.Outputs = outputs;
+
                 switch (protocol)
                 {
                     case Protocol.TCP:
@@ -86,22 +85,35 @@ namespace MILAV.API.Device
                     // Call the default "creator" used by Newtonsoft when deserializing
                     var value = (AbstractDevice)serializer.ContractResolver.ResolveContract(type).DefaultCreator();
 
-                    // Not thread safe :(
-                    lock (Configuration.LOCK)
+                    // Read and map inputs
+                    Input[] inputArray;
+                    var inputs = jObject["inputs"];
+                    if(inputs == null)
                     {
-                        // Add InputConverter for this device instance
-                        var inputConveter = new InputConverter(value);
-                        serializer.Converters.Add(inputConveter);
-
-                        // Populate the default value with the values from the jObject
-                        serializer.Populate(jObject.CreateReader(), value);
-
-                        // Remove InputConverter for this device instance
-                        serializer.Converters.Remove(inputConveter);
+                        inputArray = new Input[0];
+                    }
+                    else
+                    {
+                        inputArray = inputs.Select(json => new Input(value, (IOType) Enum.Parse(typeof(IOType), (string)json["type"], true), (string)json["group"], (string)json["id"], (int)json["input"])).ToArray();
                     }
 
+                    // Read and map outputs
+                    Output[] outputArray;
+                    var outputs = jObject["outputs"];
+                    if (outputs == null)
+                    {
+                        outputArray = new Output[0];
+                    }
+                    else
+                    {
+                        outputArray = outputs.Select(json => new Output(value, (IOType)Enum.Parse(typeof(IOType), (string)json["type"], true), (string)json["group"], (string)json["id"], (int)json["output"])).ToArray();
+                    }
+
+                    // Populate the default value with the values from the jObject
+                    serializer.Populate(jObject.CreateReader(), value);
+
                     // Finish initialization of device
-                    value.Initialize();
+                    value.Initialize(inputArray, outputArray);
 
                     return value;
                 }
