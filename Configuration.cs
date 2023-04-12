@@ -1,8 +1,7 @@
-﻿using MILAV.API;
-using MILAV.API.Device;
+﻿using MILAV.API.Device;
 using Newtonsoft.Json;
 
-namespace MILAV.Config
+namespace MILAV.API
 {
     // Using properties instead of fields in this JsonObject for initializing with default values
     [JsonObject(MemberSerialization = MemberSerialization.OptIn)]
