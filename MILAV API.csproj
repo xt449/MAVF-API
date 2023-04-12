@@ -16,7 +16,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Device\TouchPanel\" />
     <Folder Include="Device\VTC\" />
     <Folder Include="Device\VideoController\VideoWall\" />
   </ItemGroup>
