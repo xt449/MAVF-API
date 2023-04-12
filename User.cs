@@ -1,5 +1,4 @@
-﻿using MILAV.API.Connection;
-using MILAV.API.Device;
+﻿using MILAV.API.Device;
 using Newtonsoft.Json;
 
 namespace MILAV.API

@@ -43,8 +43,8 @@ namespace MILAV.API.Device
             if (JToken.ReadFrom(reader) is JObject jObject)
             {
                 return new Input(
-                    device, 
-                    (string?)jObject["id"] ?? throw new JsonException("Device was deserialized with null 'id'"), 
+                    device,
+                    (string?)jObject["id"] ?? throw new JsonException("Device was deserialized with null 'id'"),
                     (int?)jObject["input"] ?? throw new JsonException("Device was deserialized with null 'input'")
                 );
             }
