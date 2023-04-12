@@ -13,24 +13,23 @@ namespace MILAV.API
         /// <summary>
         /// Used to determine which groups this device can send control actions to
         /// </summary>
-        [JsonProperty("states", Required = Required.DisallowNull)]
-        public ControlState[] States { get; private set; }
+        [JsonProperty(Required = Required.DisallowNull)]
+        public readonly ControlState[] states;
 
         /// <summary>
         /// Used to determine which groups this device can send control actions to
         /// </summary>
         public ControlState? State { get; private set; }
 
-
         public void Validate()
         {
             if (ip == null) throw new JsonException("Device was deserialized with null 'ip'");
-            if (States == null) throw new JsonException("Device was deserialized with null 'states'");
+            if (states == null) throw new JsonException("Device was deserialized with null 'states'");
         }
 
         public void SetControlState(string nextState)
         {
-            State = States.FirstOrDefault(cs => cs.id == nextState);
+            State = states.FirstOrDefault(cs => cs.id == nextState);
         }
 
         public bool CanControlOutput(Output output)
