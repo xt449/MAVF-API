@@ -1,6 +1,6 @@
 ﻿using MILAV.API.Layout;
 
-namespace MILAV.API.Device.VideoController
+namespace MILAV.API.Device.Video
 {
     public interface ILayoutControl
     {

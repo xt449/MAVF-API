@@ -1,4 +1,4 @@
-﻿namespace MILAV.API.Device.Shades
+﻿namespace MILAV.API.Device.Shade
 {
     public interface IShadeControl
     {

@@ -1,4 +1,4 @@
-﻿namespace MILAV.API.Device.Lighting
+﻿namespace MILAV.API.Device.Light
 {
     public interface ILightControl
     {
