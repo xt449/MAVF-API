@@ -76,9 +76,6 @@ namespace MILAV.API.Device
         {
             if (JToken.ReadFrom(reader) is JObject jObject)
             {
-                // Ensure that the DeviceRegistry has been initialized before accessing it
-                DeviceRegistry.Initialize();
-
                 // Get the type device type that matches the "type" and "driver" properties of the JSON object
                 if (DeviceRegistry.TryGet((string?)jObject["driver"], out Type? type))
                 {
@@ -117,15 +114,17 @@ namespace MILAV.API.Device
 
                     return value;
                 }
+
+                throw new JsonException($"Unable to deserialize AbstractDevice. Invalid driver '{(string?)jObject["driver"]}'");
             }
 
-            // Return null when the token is not a JObject or when driver id is not valid
+            // Return null when the token is not a JObject
             return null;
         }
 
         public override void WriteJson(JsonWriter writer, object? value, JsonSerializer serializer)
         {
-            // Use default serialization
+            // default
         }
     }
 }

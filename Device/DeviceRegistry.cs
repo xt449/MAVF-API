@@ -6,10 +6,7 @@ namespace MILAV.API.Device
     {
         private static readonly Dictionary<string, Type> deviceDriverToType = new Dictionary<string, Type>();
 
-        /// <summary>
-        /// Slow
-        /// </summary>
-        public static void Initialize()
+        private static void Initialize()
         {
             // Only continue if there are no entries already in the registry
             if (deviceDriverToType.Count > 0)
@@ -41,6 +38,8 @@ namespace MILAV.API.Device
                 o = null;
                 return false;
             }
+
+            Initialize();
 
             return deviceDriverToType.TryGetValue(id, out o);
         }
