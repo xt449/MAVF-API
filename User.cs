@@ -31,7 +31,12 @@ namespace MILAV.API
             State = states.FirstOrDefault(cs => cs.id == nextState);
         }
 
-        public bool CanControlOutput(Output output)
+        public bool CanRouteInput(Input input)
+        {
+            return State?.groups.Contains(input.group) ?? false;
+        }
+
+        public bool CanRouteOutput(Output output)
         {
             return State?.groups.Contains(output.group) ?? false;
         }
