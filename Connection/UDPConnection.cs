@@ -1,34 +1,46 @@
-﻿namespace MILAV.API.Connection
+﻿using System.Net;
+using System.Net.Sockets;
+
+namespace MILAV.API.Connection
 {
     internal class UDPConnection : IPConnection
     {
+        private readonly UdpClient client;
+
+        private IPEndPoint remoteEndPoint;
+
         public UDPConnection(string ip, int port) : base(ip, port)
         {
+            client = new UdpClient();
+            remoteEndPoint = new IPEndPoint(IPAddress.Parse(ip), port);
         }
 
         public override bool Connect()
         {
-            throw new NotImplementedException();
+            client.Connect(remoteEndPoint);
+
+            // UDP is best case
+            return true;
         }
 
         public override void Disconnect()
         {
-            throw new NotImplementedException();
+            client.Close();
         }
 
         public override void Dispose()
         {
-            throw new NotImplementedException();
+            client.Dispose();
         }
 
         public override byte[] ReadBytes(int maxLength = 4096)
         {
-            throw new NotImplementedException();
+            return client.Receive(ref remoteEndPoint);
         }
 
         public override void WriteBytes(byte[] buffer, int offset, int length)
         {
-            throw new NotImplementedException();
+            client.Send(buffer, length, remoteEndPoint);
         }
     }
 }
