@@ -16,8 +16,10 @@ namespace MILAV.API
         // Should this be hidden?
         public string? GetDeviceIpById(string id);
 
+        // Should this be hidden?
         public int? GetDevicePortById(string id);
 
+        // Should this be hidden?
         public Protocol? GetDeviceProtocolById(string id);
 
         public Input[]? GetDeviceInputsById(string id);
