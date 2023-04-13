@@ -18,7 +18,7 @@ namespace MILAV.API.Connection
 
         public override object? ReadJson(JsonReader reader, Type objectType, object? existingValue, JsonSerializer serializer)
         {
-            var value = (string)JToken.ReadFrom(reader);
+            var value = (string?)JToken.ReadFrom(reader);
             return value == null ? null : Enum.Parse(typeof(Protocol), value, true);
         }
 

@@ -76,7 +76,7 @@ namespace MILAV.API.Device
         {
             if (JToken.ReadFrom(reader) is JObject jObject)
             {
-                // Get the type device type that matches the "type" and "driver" properties of the JSON object
+                // Get the type device type that matches the "driver" properties of the JSON object
                 if (DeviceRegistry.TryGet((string?)jObject["driver"], out Type? type))
                 {
                     // Call the default "creator" used by Newtonsoft when deserializing
