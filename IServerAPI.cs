@@ -7,7 +7,7 @@ namespace MILAV.API
     {
         // Devices
 
-        public AbstractDevice[] GetDevices();
+        public IEnumerable<AbstractDevice> GetDevices();
 
         // Device
 
@@ -22,9 +22,9 @@ namespace MILAV.API
         // Should this be hidden?
         public Protocol? GetDeviceProtocolById(string id);
 
-        public Input[]? GetDeviceInputsById(string id);
+        public IEnumerable<Input>? GetDeviceInputsById(string id);
 
-        public Output[]? GetDeviceOutputsById(string id);
+        public IEnumerable<Output>? GetDeviceOutputsById(string id);
 
         // ControlState
 
