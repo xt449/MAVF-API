@@ -1,26 +1,58 @@
 ﻿using MILAV.API.Device;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace MILAV.API
 {
-    // Using properties instead of fields in this JsonObject for initializing with default values
+    [JsonConverter(typeof(ConfigurationConverter))]
     [JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-    [JsonArray(AllowNullItems = false)]
     public class Configuration
     {
-        [JsonProperty(Required = Required.DisallowNull)]
-        public readonly bool debug = false;
+        public readonly bool debug;
 
-        [JsonProperty(Required = Required.DisallowNull)]
-        public readonly string defaultState = "";
+        public readonly string defaultState;
 
-        [JsonProperty(Required = Required.DisallowNull)]
-        public readonly AbstractDevice[] devices = new AbstractDevice[0];
+        public readonly Dictionary<string, AbstractDevice> devices;
 
-        [JsonProperty(Required = Required.DisallowNull)]
-        public readonly User[] users = new User[0];
+        public readonly Dictionary<string, User> users;
 
-        // (De)Serialization lock
-        public static readonly object LOCK = new object();
+        public Configuration(bool debug, string defaultState, AbstractDevice[] devices, User[] users)
+        {
+            this.debug = debug;
+            this.defaultState = defaultState;
+            this.devices = devices.ToDictionary(d => d.id, d => d);
+            this.users = users.ToDictionary(u => u.ip, u => u);
+        }
+    }
+
+    public class ConfigurationConverter : JsonConverter
+    {
+        public override bool CanWrite => false;
+
+        public override bool CanConvert(Type objectType)
+        {
+            return typeof(Configuration).IsAssignableFrom(objectType);
+        }
+
+        public override object? ReadJson(JsonReader reader, Type objectType, object? existingValue, JsonSerializer serializer)
+        {
+            if (JToken.ReadFrom(reader) is JObject jObject)
+            {
+                return new Configuration(
+                    (bool?)jObject["debug"] ?? throw new JsonException("Unable to deserialize User. Missing or invalid property 'debug'"),
+                    (string?)jObject["defaultState"] ?? throw new JsonException("Unable to deserialize User. Missing or invalid property 'defaultState'"),
+                    jObject["devices"]?.ToObject<AbstractDevice[]>() ?? throw new JsonException("Unable to deserialize User. Missing or invalid property 'devices'"),
+                    jObject["users"]?.ToObject<User[]>() ?? throw new JsonException("Unable to deserialize User. Missing or invalid property 'users'")
+                );
+            }
+
+            // Return null when the token is not a JObject
+            return null;
+        }
+
+        public override void WriteJson(JsonWriter writer, object? value, JsonSerializer serializer)
+        {
+            // default
+        }
     }
 }
