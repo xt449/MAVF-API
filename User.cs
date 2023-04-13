@@ -1,34 +1,33 @@
 ﻿using MILAV.API.Device;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace MILAV.API
 {
+    [JsonConverter(typeof(UserConverter))]
     [JsonObject(MemberSerialization.OptIn)]
     public class User
     {
-        [JsonProperty(Required = Required.DisallowNull)]
         public readonly string ip;
-
+        
         /// <summary>
         /// Used to determine which groups this device can send control actions to
         /// </summary>
-        [JsonProperty(Required = Required.DisallowNull)]
-        public readonly ControlState[] states;
+        private readonly Dictionary<string, ControlState> states;
 
         /// <summary>
         /// Used to determine which groups this device can send control actions to
         /// </summary>
         public ControlState? State { get; private set; }
 
-        public void Validate()
-        {
-            if (ip == null) throw new JsonException("Device was deserialized with null 'ip'");
-            if (states == null) throw new JsonException("Device was deserialized with null 'states'");
+        public User(string ip, ControlState[] states) {
+            this.ip = ip;
+            this.states = states.ToDictionary(s => s.id, s => s);
         }
 
         public void SetControlState(string nextState)
         {
-            State = states.FirstOrDefault(cs => cs.id == nextState);
+            State = states[nextState];
         }
 
         public bool CanRouteInput(Input input)
@@ -39,6 +38,35 @@ namespace MILAV.API
         public bool CanRouteOutput(Output output)
         {
             return State?.groups.Contains(output.group) ?? false;
+        }
+    }
+
+    public class UserConverter : JsonConverter
+    {
+        public override bool CanWrite => false;
+
+        public override bool CanConvert(Type objectType)
+        {
+            return typeof(User).IsAssignableFrom(objectType);
+        }
+
+        public override object? ReadJson(JsonReader reader, Type objectType, object? existingValue, JsonSerializer serializer)
+        {
+            if (JToken.ReadFrom(reader) is JObject jObject)
+            {
+                return new User(
+                    (string?)jObject["ip"] ?? throw new JsonException("Unable to deserialize User. Missing or invalid property 'ip'"),
+                    jObject["states"]?.ToObject<ControlState[]>() ?? throw new JsonException("Unable to deserialize User. Missing or invalid property 'states'")
+                );
+            }
+
+            // Return null when the token is not a JObject
+            return null;
+        }
+
+        public override void WriteJson(JsonWriter writer, object? value, JsonSerializer serializer)
+        {
+            // default
         }
     }
 }
