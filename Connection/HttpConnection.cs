@@ -2,23 +2,27 @@
 {
     internal class HttpConnection : IPConnection
     {
+        private readonly HttpClient client;
+
         public HttpConnection(string ip, int port) : base(ip, port)
         {
+            client = new HttpClient();
         }
 
         public override bool Connect()
         {
-            throw new NotImplementedException();
+            // Unused for HTTP
+            return true;
         }
 
         public override void Disconnect()
         {
-            throw new NotImplementedException();
+            // Unused for HTTP
         }
 
         public override void Dispose()
         {
-            throw new NotImplementedException();
+            client.Dispose();
         }
 
         public override byte[] ReadBytes(int maxLength = 4096)
