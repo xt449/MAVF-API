@@ -23,9 +23,9 @@ namespace MILAV.API.Device
         [JsonProperty(Required = Required.DisallowNull)]
         public readonly Protocol protocol;
 
-        public Dictionary<string, Input> Inputs { get; private set; }
+        public Dictionary<string, Input> Inputs { get; private set; } = new Dictionary<string, Input>();
 
-        public Dictionary<string, Output> Outputs { get; private set; }
+        public Dictionary<string, Output> Outputs { get; private set; } = new Dictionary<string, Output>();
 
         public IPConnection Connection { get; private set; }
 
