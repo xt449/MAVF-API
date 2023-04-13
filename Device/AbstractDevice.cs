@@ -88,13 +88,13 @@ namespace MILAV.API.Device
                     // Read and map inputs
                     Input[] inputArray;
                     var inputs = jObject["inputs"];
-                    if(inputs == null)
+                    if (inputs == null)
                     {
                         inputArray = new Input[0];
                     }
                     else
                     {
-                        inputArray = inputs.Select(json => new Input(value, (IOType) Enum.Parse(typeof(IOType), (string)json["type"], true), (string)json["group"], (string)json["id"], (int)json["input"])).ToArray();
+                        inputArray = inputs.Select(json => new Input(value, (IOType)Enum.Parse(typeof(IOType), (string)json["type"], true), (string)json["group"], (string)json["id"], (int)json["input"])).ToArray();
                     }
 
                     // Read and map outputs

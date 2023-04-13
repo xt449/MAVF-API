@@ -9,7 +9,7 @@ namespace MILAV.API
     public class User
     {
         public readonly string ip;
-        
+
         /// <summary>
         /// Used to determine which groups this device can send control actions to
         /// </summary>
@@ -20,7 +20,8 @@ namespace MILAV.API
         /// </summary>
         public ControlState? State { get; private set; }
 
-        public User(string ip, ControlState[] states) {
+        public User(string ip, ControlState[] states)
+        {
             this.ip = ip;
             this.states = states.ToDictionary(s => s.id, s => s);
         }
