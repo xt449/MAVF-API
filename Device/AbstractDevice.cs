@@ -23,9 +23,9 @@ namespace MILAV.API.Device
         [JsonProperty(Required = Required.DisallowNull)]
         public readonly Protocol protocol;
 
-        public Input[] Inputs { get; private set; }
+        public Dictionary<string, Input> Inputs { get; private set; }
 
-        public Output[] Outputs { get; private set; }
+        public Dictionary<string, Output> Outputs { get; private set; }
 
         public IPConnection Connection { get; private set; }
 
@@ -34,8 +34,8 @@ namespace MILAV.API.Device
             // Only if Connection not yet initialized
             if (Connection == null)
             {
-                this.Inputs = inputs;
-                this.Outputs = outputs;
+                this.Inputs = inputs.ToDictionary(i => i.id, i => i);
+                this.Outputs = outputs.ToDictionary(o => o.id, o => o);
 
                 switch (protocol)
                 {
