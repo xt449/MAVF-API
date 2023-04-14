@@ -13,7 +13,7 @@ namespace MILAV.API.Device.USB
 
         public bool Route(Input input, Output output)
         {
-            if(input.device != output.device)
+            if (input.device != output.device)
             {
                 return false;
             }
@@ -25,7 +25,7 @@ namespace MILAV.API.Device.USB
                 // or something else?
                 Connection.WriteASCII(requestSetRoute.Replace("$1", input.input.ToString()).Replace("$2", output.output.ToString()));
 
-                return (Regex.Match(Connection.ReadASCII(), responseSetRoute).Success);
+                return Regex.Match(Connection.ReadASCII(), responseSetRoute).Success;
             }
 
             return false;

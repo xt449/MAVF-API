@@ -34,7 +34,7 @@ namespace MILAV.API.Connection
             var buffer = new ArraySegment<byte>(new byte[maxLength]);
             using var source = new CancellationTokenSource(5_000);
             var result = client.ReceiveAsync(buffer, source.Token).Result;
-            if(result == null)
+            if (result == null)
             {
                 return new byte[0];
             }
