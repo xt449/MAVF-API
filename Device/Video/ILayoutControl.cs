@@ -4,8 +4,8 @@ namespace MILAV.API.Device.Video
 {
     public interface ILayoutControl
     {
-        ILayout GetLayout();
+        public ILayout GetLayout();
 
-        void SetLayout(ILayout layout);
+        public void SetLayout(ILayout layout);
     }
 }

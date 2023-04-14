@@ -4,8 +4,8 @@ namespace MILAV.API.Device.Video.VideoWall
 {
     public interface IVideoWallController
     {
-        ILayout GetWallLayout(int wall);
+        public ILayout GetWallLayout(int wall);
 
-        void SetWallLayout(int wall, ILayout layout);
+        public void SetWallLayout(int wall, ILayout layout);
     }
 }

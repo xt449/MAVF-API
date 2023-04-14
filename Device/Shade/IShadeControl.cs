@@ -2,10 +2,10 @@
 {
     public interface IShadeControl
     {
-        void ShadesOpen();
+        public void ShadesOpen();
 
-        void ShadesHalf();
+        public void ShadesHalf();
 
-        void ShadesClose();
+        public void ShadesClose();
     }
 }
