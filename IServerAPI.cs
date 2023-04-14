@@ -33,5 +33,11 @@ namespace MILAV.API
         public void SetControlState(string state);
 
         public void ResetControlState();
+
+        // Routing
+
+        public bool TryRoute(Input input, Output output);
+
+        public Input? GetRoute(Output output);
     }
 }

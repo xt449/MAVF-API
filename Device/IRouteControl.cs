@@ -2,6 +2,6 @@
 {
     public interface IRouteControl
     {
-        void Route(Input input, Output output);
+        bool Route(Input input, Output output);
     }
 }
