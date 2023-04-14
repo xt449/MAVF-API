@@ -1,10 +1,11 @@
-﻿using MILAV.API.Device.Video.VideoSwitcher;
+﻿using MILAV.API.Device.Routing;
+using MILAV.API.Device.Video.VideoSwitcher;
 using Newtonsoft.Json;
 using System.Text.RegularExpressions;
 
 namespace MILAV.API.Device.USB
 {
-    public class CustomVideoSwitcherController : AbstractDevice, IVideoSwitcherControl
+    public class CustomVideoSwitcherController : AbstractDevice, IVideoSwitcherControl<InputOutputPort, InputOutputPort>
     {
         [JsonProperty(Required = Required.DisallowNull)]
         public readonly string requestSetRoute;
@@ -12,11 +13,15 @@ namespace MILAV.API.Device.USB
         [JsonProperty(Required = Required.DisallowNull)]
         public readonly string responseSetRoute;
 
-        public Dictionary<string, Input> Inputs { get; init; }
+        [JsonConverter(typeof(IdentifiableCollectionToDictionaryConverter<InputOutputPort>))]
+        [JsonProperty(Required = Required.DisallowNull)]
+        public Dictionary<string, InputOutputPort> Inputs { get; init; }
 
-        public Dictionary<string, Output> Outputs { get; init; }
+        [JsonConverter(typeof(IdentifiableCollectionToDictionaryConverter<InputOutputPort>))]
+        [JsonProperty(Required = Required.DisallowNull)]
+        public Dictionary<string, InputOutputPort> Outputs { get; init; }
 
-        public bool Route(Input input, Output output)
+        bool IRouteControl<InputOutputPort, InputOutputPort>.ExecuteRoute(InputOutputPort input, InputOutputPort output)
         {
             if (Connection.Connect())
             {

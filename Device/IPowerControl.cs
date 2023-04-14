@@ -2,8 +2,8 @@
 {
     public interface IPowerControl
     {
-        bool GetPower();
+        public bool GetPower();
 
-        void SetPower(bool state);
+        public void SetPower(bool state);
     }
 }

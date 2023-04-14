@@ -1,4 +1,5 @@
 ﻿using MILAV.API.Device;
+using MILAV.API.Device.Routing;
 
 namespace MILAV.API
 {
@@ -12,9 +13,9 @@ namespace MILAV.API
 
         public IDevice? GetDeviceById(string deviceId);
 
-        public IEnumerable<Input>? GetDeviceInputsById(string deviceId);
+        public IEnumerable<IInputOutput>? GetDeviceInputsById(string deviceId);
 
-        public IEnumerable<Output>? GetDeviceOutputsById(string deviceId);
+        public IEnumerable<IInputOutput>? GetDeviceOutputsById(string deviceId);
 
         // ControlState
 
@@ -26,8 +27,8 @@ namespace MILAV.API
 
         // Routing
 
-        public bool TryRoute(string deviceId, Input input, Output output);
+        public bool TryRoute(string deviceId, IInputOutput input, IInputOutput output);
 
-        public Input? GetRoute(string deviceId, Output output);
+        public IInputOutput? GetRoute(string deviceId, IInputOutput output);
     }
 }
