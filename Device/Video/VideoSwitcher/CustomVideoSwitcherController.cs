@@ -5,6 +5,7 @@ using System.Text.RegularExpressions;
 
 namespace MILAV.API.Device.USB
 {
+    [Device("customvideoswitcher")]
     public class CustomVideoSwitcherController : AbstractDevice, IVideoSwitcherControl<InputOutputPort, InputOutputPort>
     {
         [JsonProperty(Required = Required.DisallowNull)]
