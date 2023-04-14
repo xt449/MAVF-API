@@ -6,9 +6,11 @@ namespace MILAV.API
 {
     [JsonConverter(typeof(UserConverter))]
     [JsonObject(MemberSerialization.OptIn)]
-    public class User
+    public class User : IIdentifiable
     {
-        public readonly string ip;
+        private readonly string ip;
+
+        public string Id => ip;
 
         /// <summary>
         /// Used to determine which groups this device can send control actions to

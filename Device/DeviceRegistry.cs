@@ -15,7 +15,7 @@ namespace MILAV.API.Device
             }
 
             // For each type that is castable to IDevice 
-            foreach (var type in AppDomain.CurrentDomain.GetAssemblies().SelectMany(assembly => assembly.GetTypes()).Where(type => typeof(AbstractDevice).IsAssignableFrom(type) && !type.IsAbstract))
+            foreach (var type in AppDomain.CurrentDomain.GetAssemblies().SelectMany(assembly => assembly.GetTypes()).Where(type => typeof(IDevice).IsAssignableFrom(type) && !type.IsAbstract))
             {
                 var attribute = (DeviceAttribute?)Attribute.GetCustomAttribute(type, typeof(DeviceAttribute));
                 // True for types that have the DeviceAttribute

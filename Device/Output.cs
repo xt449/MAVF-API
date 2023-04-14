@@ -1,24 +1,27 @@
-﻿namespace MILAV.API.Device
-{
-    public class Output
-    {
-        public readonly AbstractDevice device;
+﻿using Newtonsoft.Json;
 
+namespace MILAV.API.Device
+{
+    [JsonObject(MemberSerialization.OptIn)]
+    public class Output : IIdentifiable
+    {
+        public string Id { get; init; }
+
+        [JsonProperty(Required = Required.DisallowNull)]
         public readonly IOType type;
 
-        public readonly string id;
+        [JsonProperty(Required = Required.DisallowNull)]
+        public readonly int port;
 
-        public readonly int output;
-
+        [JsonProperty(Required = Required.DisallowNull)]
         public readonly string group;
 
-        public Output(AbstractDevice device, IOType type, string group, string id, int output)
+        public Output(string id, IOType type, int port, string group)
         {
-            this.device = device;
+            this.Id = id;
             this.type = type;
+            this.port = port;
             this.group = group;
-            this.id = id;
-            this.output = output;
         }
     }
 }
