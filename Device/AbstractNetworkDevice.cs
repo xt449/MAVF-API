@@ -3,7 +3,7 @@ using Newtonsoft.Json;
 
 namespace MILAV.API.Device
 {
-    public abstract class AbstractDevice : IDevice
+    public abstract class AbstractNetworkDevice : IDevice
     {
         public string Id { get; init; }
 
