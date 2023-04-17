@@ -1,5 +1,6 @@
 ﻿using MILAV.API.Device;
 using MILAV.API.Device.Routing;
+using MILAV.API.Layout;
 
 namespace MILAV.API
 {
@@ -13,10 +14,6 @@ namespace MILAV.API
 
         public IDevice? GetDeviceById(string deviceId);
 
-        public IEnumerable<IInputOutput>? GetDeviceInputsById(string deviceId);
-
-        public IEnumerable<IInputOutput>? GetDeviceOutputsById(string deviceId);
-
         // ControlState
 
         public string GetControlState();
@@ -27,8 +24,18 @@ namespace MILAV.API
 
         // Routing
 
+        public IEnumerable<IInputOutput>? GetDeviceInputsById(string deviceId);
+
+        public IEnumerable<IInputOutput>? GetDeviceOutputsById(string deviceId);
+
         public bool TryRoute(string deviceId, IInputOutput input, IInputOutput output);
 
         public IInputOutput? GetRoute(string deviceId, IInputOutput output);
+
+        // Layouts
+
+        public bool TryLayout(string deviceId, ILayout layout);
+
+        public ILayout? GetLayout(string deviceId);
     }
 }
