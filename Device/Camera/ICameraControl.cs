@@ -2,20 +2,20 @@
 {
     public interface ICameraControl
     {
-        void PanUp();
+        public void PanUp();
 
-        void PanDown();
+        public void PanDown();
 
-        void PanLeft();
+        public void PanLeft();
 
-        void PanRight();
+        public void PanRight();
 
-        void ZoomIn();
+        public void ZoomIn();
 
-        void ZoomOut();
+        public void ZoomOut();
 
-        void OpenLens();
+        public void OpenLens();
 
-        void CloseLens();
+        public void CloseLens();
     }
 }

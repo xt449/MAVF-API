@@ -2,6 +2,6 @@
 {
     public interface ILightControl
     {
-        void SetLightLevel(float lightLevel);
+        public void SetLightLevel(float lightLevel);
     }
 }

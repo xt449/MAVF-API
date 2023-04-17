@@ -12,30 +12,30 @@
             SetPower(false);
         }
 
-        void ArrowUp();
+        public void ArrowUp();
 
-        void ArrowDown();
+        public void ArrowDown();
 
-        void ArrowLeft();
+        public void ArrowLeft();
 
-        void ArrowRight();
+        public void ArrowRight();
 
-        void Enter();
+        public void Enter();
 
-        void Exit();
+        public void Exit();
 
-        void Back();
+        public void Back();
 
-        void Guide();
+        public void Guide();
 
-        void Menu();
+        public void Menu();
 
-        void ChannelUp();
+        public void ChannelUp();
 
-        void ChannelDown();
+        public void ChannelDown();
 
-        void VolumeUp();
+        public void VolumeUp();
 
-        void VolumeDown();
+        public void VolumeDown();
     }
 }

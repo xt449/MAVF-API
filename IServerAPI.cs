@@ -1,5 +1,5 @@
-﻿using MILAV.API.Connection;
-using MILAV.API.Device;
+﻿using MILAV.API.Device;
+using MILAV.API.Device.Routing;
 
 namespace MILAV.API
 {
@@ -7,24 +7,15 @@ namespace MILAV.API
     {
         // Devices
 
-        public IEnumerable<AbstractDevice> GetDevices();
+        public IEnumerable<IDevice> GetDevices();
 
         // Device
 
-        public AbstractDevice? GetDeviceById(string id);
+        public IDevice? GetDeviceById(string deviceId);
 
-        // Should this be hidden?
-        public string? GetDeviceIpById(string id);
+        public IEnumerable<IInputOutput>? GetDeviceInputsById(string deviceId);
 
-        // Should this be hidden?
-        public int? GetDevicePortById(string id);
-
-        // Should this be hidden?
-        public Protocol? GetDeviceProtocolById(string id);
-
-        public IEnumerable<Input>? GetDeviceInputsById(string id);
-
-        public IEnumerable<Output>? GetDeviceOutputsById(string id);
+        public IEnumerable<IInputOutput>? GetDeviceOutputsById(string deviceId);
 
         // ControlState
 
@@ -36,8 +27,8 @@ namespace MILAV.API
 
         // Routing
 
-        public bool TryRoute(Input input, Output output);
+        public bool TryRoute(string deviceId, IInputOutput input, IInputOutput output);
 
-        public Input? GetRoute(Output output);
+        public IInputOutput? GetRoute(string deviceId, IInputOutput output);
     }
 }

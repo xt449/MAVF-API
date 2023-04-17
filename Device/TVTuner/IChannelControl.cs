@@ -2,8 +2,8 @@
 {
     public interface IChannelControl
     {
-        string GetChannel();
+        public string GetChannel();
 
-        void SetChannel(string channel);
+        public void SetChannel(string channel);
     }
 }

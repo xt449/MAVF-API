@@ -1,14 +1,16 @@
 ﻿using MILAV.API.Device;
+using MILAV.API.Device.Routing;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
 namespace MILAV.API
 {
     [JsonConverter(typeof(UserConverter))]
-    [JsonObject(MemberSerialization.OptIn)]
-    public class User
+    public class User : IIdentifiable
     {
-        public readonly string ip;
+        private readonly string ip;
+
+        public string Id { get => ip; init { } }
 
         /// <summary>
         /// Used to determine which groups this device can send control actions to
@@ -31,14 +33,14 @@ namespace MILAV.API
             State = states[nextState];
         }
 
-        public bool CanRouteInput(Input input)
+        public bool CanRouteInput(IInputOutput input)
         {
-            return State?.groups.Contains(input.group) ?? false;
+            return State?.groups.Contains(input.Group) ?? false;
         }
 
-        public bool CanRouteOutput(Output output)
+        public bool CanRouteOutput(IInputOutput output)
         {
-            return State?.groups.Contains(output.group) ?? false;
+            return State?.groups.Contains(output.Group) ?? false;
         }
     }
 

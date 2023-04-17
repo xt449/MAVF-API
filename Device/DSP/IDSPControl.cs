@@ -1,6 +1,8 @@
-﻿namespace MILAV.API.Device.DSP
+﻿using MILAV.API.Device.Routing;
+
+namespace MILAV.API.Device.DSP
 {
-    public interface IDSPControl : IRouteControl
+    public interface IDSPControl<I, O> : IRouteControl<I, O> where I : IInputOutput where O : IInputOutput
     {
     }
 }
