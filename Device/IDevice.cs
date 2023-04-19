@@ -28,10 +28,10 @@ namespace MILAV.API.Device
             if (JToken.ReadFrom(reader) is JObject jObject)
             {
                 // Get the type device type that matches the "driver" properties of the JSON object
-                if (DeviceRegistry.TryGet((string?)jObject["driver"], out Type? type))
+                if (DeviceRegistry.TryGet((string?)jObject["driver"] ?? throw new JsonException($"Unable to deserialize device. Missing driver property"), out Type? type))
                 {
                     // Call the default "creator" used by Newtonsoft when deserializing
-                    var value = (IDevice)serializer.ContractResolver.ResolveContract(type).DefaultCreator();
+                    var value = (IDevice?)serializer.ContractResolver.ResolveContract(type).DefaultCreator?.Invoke() ?? throw new JsonException($"Unable to deserialize device. DefaultCreator is null for driver '{(string?)jObject["driver"]}'");
 
                     // Populate the default value with the values from the jObject
                     serializer.Populate(jObject.CreateReader(), value);

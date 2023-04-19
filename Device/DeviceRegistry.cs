@@ -31,11 +31,11 @@ namespace MILAV.API.Device
             }
         }
 
-        public static bool TryGet(string id, out Type? o)
+        public static bool TryGet(string driver, out Type o)
         {
             Initialize();
 
-            return deviceDriverToType.TryGetValue(id, out o);
+            return deviceDriverToType.TryGetValue(driver, out o);
         }
     }
 }

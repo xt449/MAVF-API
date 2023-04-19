@@ -6,7 +6,7 @@
 
         public Dictionary<string, O> Outputs { get; }
 
-        protected Dictionary<O, I> routes { get; }
+        protected Dictionary<O, I> Routes { get; }
 
         public bool Route(I input, O output)
         {
@@ -15,7 +15,7 @@
                 var result = ExecuteRoute(input, output);
                 if (result)
                 {
-                    routes[output] = input;
+                    Routes[output] = input;
                 }
             }
 
@@ -26,7 +26,7 @@
 
         public virtual I? GetRoute(O output)
         {
-            return routes[output];
+            return Routes[output];
         }
     }
 }

@@ -38,8 +38,9 @@ namespace MILAV.API.Connection
             {
                 return new byte[0];
             }
-            // This should never be null
+#pragma warning disable CS8603 // This will never be null
             return buffer.Array;
+#pragma warning restore CS8603 // This will never be null
         }
 
         public override void WriteBytes(byte[] buffer, int offset, int length)
