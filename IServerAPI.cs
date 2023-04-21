@@ -28,14 +28,20 @@ namespace MILAV.API
 
         public IEnumerable<IInputOutput>? GetDeviceOutputsById(string deviceId);
 
-        public bool TryRoute(string deviceId, IInputOutput input, IInputOutput output);
+        public bool TrySetRoute(string deviceId, IInputOutput input, IInputOutput output);
 
         public IInputOutput? GetRoute(string deviceId, IInputOutput output);
 
-        // Layouts
+        // Layout
 
-        public bool TryLayout(string deviceId, ILayout layout);
+        public bool TrySetLayout(string deviceId, ILayout layout);
 
         public ILayout? GetLayout(string deviceId);
+
+        // TVTuner
+
+        public bool TrySetChannel(string deviceId, string channel);
+
+        public string? GetChannel(string deviceId);
     }
 }
