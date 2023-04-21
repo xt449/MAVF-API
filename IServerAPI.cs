@@ -43,5 +43,11 @@ namespace MILAV.API
         public bool TrySetChannel(string deviceId, string channel);
 
         public string? GetChannel(string deviceId);
+
+        // PDU
+
+        public bool TryTurnPowerOn(string deviceId, int port);
+
+        public bool TryTurnPowerOff(string deviceId, int port);
     }
 }
