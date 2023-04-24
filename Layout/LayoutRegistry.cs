@@ -15,7 +15,7 @@
 
         public bool Add(string name, ILayout layout)
         {
-            if(layouts.ContainsKey(name))
+            if (layouts.ContainsKey(name))
             {
                 return false;
             }
