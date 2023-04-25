@@ -3,10 +3,9 @@
 namespace MILAV.API.Device
 {
     [JsonObject(MemberSerialization.OptIn)]
-    public class ControlState
+    public class ControlState : IIdentifiable
     {
-        [JsonProperty(Required = Required.DisallowNull)]
-        public readonly string id;
+        public string Id { get; init; }
 
         [JsonProperty(Required = Required.DisallowNull)]
         public readonly string[] groups;
