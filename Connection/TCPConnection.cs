@@ -45,6 +45,8 @@ namespace MILAV.API.Connection
         public override void Dispose()
         {
             client.Dispose();
+            // Compiler says this is good to have
+            GC.SuppressFinalize(this);
         }
     }
 }

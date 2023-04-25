@@ -8,7 +8,7 @@ namespace MILAV.API.Device
     public interface IDevice : IIdentifiable
     {
         [JsonProperty("driver", Required = Required.Default)]
-        private string Driver => ((DeviceAttribute?)Attribute.GetCustomAttribute(GetType(), typeof(DeviceAttribute)))?.driver ?? "unknown";
+        public string Driver => ((DeviceAttribute?)Attribute.GetCustomAttribute(GetType(), typeof(DeviceAttribute)))?.driver ?? "unknown";
 
         public void Initialize();
     }
