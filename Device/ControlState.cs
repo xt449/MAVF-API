@@ -7,7 +7,11 @@ namespace MILAV.API.Device
     {
         public string Id { get; init; }
 
+        /// <summary>
+        /// Key: User#Id
+        /// Value: Groups that can be controlled by User
+        /// </summary>
         [JsonProperty(Required = Required.DisallowNull)]
-        public readonly string[] groups;
+        public readonly Dictionary<string, string[]> controlling;
     }
 }

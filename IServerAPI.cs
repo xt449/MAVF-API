@@ -16,7 +16,7 @@ namespace MILAV.API
 
         // ControlState
 
-        public string GetControlState();
+        public ControlState GetControlState();
 
         public void SetControlState(string state);
 

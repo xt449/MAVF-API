@@ -9,9 +9,6 @@ namespace MILAV.API
         [JsonProperty(Required = Required.DisallowNull)]
         public readonly bool debug;
 
-        [JsonProperty(Required = Required.DisallowNull)]
-        public readonly string defaultState;
-
         [JsonConverter(typeof(IdentifiableCollectionToDictionaryConverter<IDevice>))]
         [JsonProperty(Required = Required.DisallowNull)]
         public readonly Dictionary<string, IDevice> devices;
@@ -20,12 +17,24 @@ namespace MILAV.API
         [JsonProperty(Required = Required.DisallowNull)]
         public readonly Dictionary<string, User> users;
 
-        public Configuration(bool debug, string defaultState)
+        [JsonProperty(Required = Required.DisallowNull)]
+        public readonly string masterUser;
+
+        [JsonConverter(typeof(IdentifiableCollectionToDictionaryConverter<ControlState>))]
+        [JsonProperty(Required = Required.DisallowNull)]
+        public readonly Dictionary<string, ControlState> states;
+
+        [JsonProperty(Required = Required.DisallowNull)]
+        public readonly string defaultState;
+
+        public Configuration(string defaultState)
         {
-            this.debug = debug;
-            this.defaultState = defaultState;
+            this.debug = true;
             this.devices = new Dictionary<string, IDevice>();
             this.users = new Dictionary<string, User>();
+            this.masterUser = string.Empty;
+            this.states = new Dictionary<string, ControlState>();
+            this.defaultState = defaultState;
         }
     }
 }
