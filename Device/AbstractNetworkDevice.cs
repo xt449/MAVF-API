@@ -16,7 +16,7 @@ namespace MILAV.API.Device
         [JsonProperty(Required = Required.DisallowNull)]
         public readonly Protocol protocol;
 
-        public IPConnection Connection { get; private set; }
+        public NetworkConnection Connection { get; private set; }
 
         public void Initialize()
         {

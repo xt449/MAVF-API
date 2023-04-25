@@ -3,7 +3,7 @@ using System.Net.Sockets;
 
 namespace MILAV.API.Connection
 {
-    internal class UDPConnection : IPConnection
+    internal class UDPConnection : NetworkConnection
     {
         private readonly UdpClient client;
 

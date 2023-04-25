@@ -1,6 +1,6 @@
 ﻿namespace MILAV.API.Connection
 {
-    internal class HttpConnection : IPConnection
+    internal class HttpConnection : NetworkConnection
     {
         private readonly HttpClient client;
 

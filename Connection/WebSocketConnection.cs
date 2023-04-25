@@ -3,7 +3,7 @@ using System.Text;
 
 namespace MILAV.API.Connection
 {
-    internal class WebSocketConnection : IPConnection
+    internal class WebSocketConnection : NetworkConnection
     {
         private readonly ClientWebSocket client;
 

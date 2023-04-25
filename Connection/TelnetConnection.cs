@@ -1,6 +1,6 @@
 ﻿namespace MILAV.API.Connection
 {
-    internal class TelnetConnection : IPConnection
+    internal class TelnetConnection : NetworkConnection
     {
         public TelnetConnection(string ip, int port) : base(ip, port)
         {

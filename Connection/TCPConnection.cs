@@ -3,7 +3,7 @@
 namespace MILAV.API.Connection
 {
     //[JsonObject("tcp")]
-    public class TCPConnection : IPConnection
+    public class TCPConnection : NetworkConnection
     {
         protected readonly TcpClient client;
 

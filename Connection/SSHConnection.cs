@@ -1,6 +1,6 @@
 ﻿namespace MILAV.API.Connection
 {
-    internal class SSHConnection : IPConnection
+    internal class SSHConnection : NetworkConnection
     {
         public SSHConnection(string ip, int port) : base(ip, port)
         {

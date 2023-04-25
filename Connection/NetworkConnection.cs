@@ -2,12 +2,12 @@
 
 namespace MILAV.API.Connection
 {
-    public abstract class IPConnection : IDisposable
+    public abstract class NetworkConnection : IDisposable
     {
         public readonly string ip;
         public readonly int port;
 
-        public IPConnection(string ip, int port)
+        public NetworkConnection(string ip, int port)
         {
             this.ip = ip;
             this.port = port;
