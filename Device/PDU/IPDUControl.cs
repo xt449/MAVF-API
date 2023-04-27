@@ -1,5 +1,4 @@
-﻿using MILAV.API.Device.Routing;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 
 namespace MILAV.API.Device.PDU
 {
