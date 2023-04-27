@@ -5,6 +5,14 @@
         Unclassified,
         Confidential,
         Secret,
-        TopSecret,
+        Top_Secret,
+    }
+
+    public static class USClassificationExtension
+    {
+        public static string ToString(this USClassification classification)
+        {
+            return classification.ToString().Replace('_', ' ');
+        }
     }
 }
