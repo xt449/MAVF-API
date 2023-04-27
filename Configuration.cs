@@ -6,25 +6,25 @@ namespace MILAV.API
     [JsonObject(MemberSerialization = MemberSerialization.OptIn)]
     public class Configuration
     {
-        [JsonProperty(Required = Required.DisallowNull)]
+        [JsonProperty(Required = Required.Always)]
         public readonly bool debug;
 
         [JsonConverter(typeof(IdentifiableCollectionToDictionaryConverter<IDevice>))]
-        [JsonProperty(Required = Required.DisallowNull)]
+        [JsonProperty(Required = Required.Always)]
         public readonly Dictionary<string, IDevice> devices;
 
         [JsonConverter(typeof(IdentifiableCollectionToDictionaryConverter<User>))]
-        [JsonProperty(Required = Required.DisallowNull)]
+        [JsonProperty(Required = Required.Always)]
         public readonly Dictionary<string, User> users;
 
-        [JsonProperty(Required = Required.DisallowNull)]
+        [JsonProperty(Required = Required.Always)]
         public readonly string masterUser;
 
         [JsonConverter(typeof(IdentifiableCollectionToDictionaryConverter<ControlState>))]
-        [JsonProperty(Required = Required.DisallowNull)]
+        [JsonProperty(Required = Required.Always)]
         public readonly Dictionary<string, ControlState> states;
 
-        [JsonProperty(Required = Required.DisallowNull)]
+        [JsonProperty(Required = Required.Always)]
         public readonly string defaultState;
 
         public Configuration(string defaultState)

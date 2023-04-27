@@ -5,7 +5,7 @@ namespace MILAV.API
 {
     public class User : IIdentifiable
     {
-        [JsonProperty("ip", Required = Required.DisallowNull)]
+        [JsonProperty("ip", Required = Required.Always)]
         public string Id { get; init; }
 
         /// <summary>

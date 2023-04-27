@@ -11,7 +11,7 @@ namespace MILAV.API.Device
         /// Key: User#Id
         /// Value: Groups that can be controlled by User
         /// </summary>
-        [JsonProperty(Required = Required.DisallowNull)]
+        [JsonProperty(Required = Required.Always)]
         public readonly Dictionary<string, string[]> controlling;
     }
 }

@@ -10,7 +10,7 @@ namespace MILAV.API.Device.Routing
 
         public string Group { get; init; }
 
-        [JsonProperty(Required = Required.DisallowNull)]
+        [JsonProperty(Required = Required.Always)]
         public readonly int window;
     }
 }

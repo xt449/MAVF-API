@@ -15,7 +15,7 @@ namespace MILAV.API.Device.PDU
         /// Key: Device#Id
         /// Value: Port
         /// </summary>
-        [JsonProperty("ports", Required = Required.DisallowNull)]
+        [JsonProperty("ports", Required = Required.Always)]
         public Dictionary<string, int> Ports { get; init; }
     }
 }

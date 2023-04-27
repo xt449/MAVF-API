@@ -7,14 +7,20 @@ namespace MILAV.API.Device
     {
         public string Id { get; init; }
 
-        [JsonProperty(Required = Required.DisallowNull)]
+        [JsonProperty(Required = Required.Always)]
         public readonly string ip;
 
-        [JsonProperty(Required = Required.DisallowNull)]
+        [JsonProperty(Required = Required.Always)]
         public readonly int port;
 
-        [JsonProperty(Required = Required.DisallowNull)]
+        [JsonProperty(Required = Required.Always)]
         public readonly Protocol protocol;
+
+        [JsonProperty]
+        public readonly string? username;
+
+        [JsonProperty]
+        public readonly string? password;
 
         public NetworkConnection Connection { get; private set; }
 
@@ -38,7 +44,7 @@ namespace MILAV.API.Device
                         Connection = new WebSocketConnection(ip, port);
                         break;
                     case Protocol.SSH:
-                        Connection = new SSHConnection(ip, port);
+                        Connection = new SSHConnection(ip, port, username ?? throw new Exception("Missing username for SSH connection"), password ?? throw new Exception("Missing password for SSH connection"));
                         break;
                     case Protocol.UDP:
                         Connection = new UDPConnection(ip, port);

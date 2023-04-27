@@ -4,10 +4,10 @@ namespace MILAV.API.Device.Routing
 {
     public interface IRouteControl<I, O> where I : IInputOutput where O : IInputOutput
     {
-        [JsonProperty("inputs", Required = Required.DisallowNull)]
+        [JsonProperty("inputs", Required = Required.Always)]
         public Dictionary<string, I> Inputs { get; init; }
 
-        [JsonProperty("outputs", Required = Required.DisallowNull)]
+        [JsonProperty("outputs", Required = Required.Always)]
         public Dictionary<string, O> Outputs { get; init; }
 
         protected Dictionary<O, I> Routes { get; }
