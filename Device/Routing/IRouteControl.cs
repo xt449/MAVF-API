@@ -1,10 +1,14 @@
-﻿namespace MILAV.API.Device.Routing
+﻿using Newtonsoft.Json;
+
+namespace MILAV.API.Device.Routing
 {
     public interface IRouteControl<I, O> where I : IInputOutput where O : IInputOutput
     {
-        public Dictionary<string, I> Inputs { get; }
+        [JsonProperty("inputs", Required = Required.DisallowNull)]
+        public Dictionary<string, I> Inputs { get; init; }
 
-        public Dictionary<string, O> Outputs { get; }
+        [JsonProperty("outputs", Required = Required.DisallowNull)]
+        public Dictionary<string, O> Outputs { get; init; }
 
         protected Dictionary<O, I> Routes { get; }
 
