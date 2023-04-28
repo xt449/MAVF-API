@@ -6,7 +6,7 @@ namespace MILAV.API.Connection
     [JsonConverter(typeof(ProtocolConverter))]
     public enum Protocol
     {
-        TCP, TELNET, HTTP, WEBSOCKET, SSH, UDP
+        TCP, TELNET, HTTP, HTTPS, WEBSOCKET, SSH, UDP
     }
 
     internal class ProtocolConverter : JsonConverter
