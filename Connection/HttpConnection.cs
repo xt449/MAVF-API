@@ -4,9 +4,10 @@
     {
         private readonly HttpClient client;
 
-        public HttpConnection(string ip, int port) : base(ip, port)
+        public HttpConnection(string ip, int port, string relativeAddress) : base(ip, port)
         {
             client = new HttpClient();
+            client.BaseAddress = new Uri($"http://{ip}:{port}/{relativeAddress}");
         }
 
         public override bool Connect()

@@ -22,6 +22,9 @@ namespace MILAV.API.Device
         [JsonProperty]
         public readonly string? password;
 
+        [JsonProperty]
+        public readonly string? httpRelativeAddress;
+
         public NetworkConnection Connection { get; private set; }
 
         public void Initialize()
@@ -38,7 +41,7 @@ namespace MILAV.API.Device
                         Connection = new TelnetConnection(ip, port);
                         break;
                     case Protocol.HTTP:
-                        Connection = new HttpConnection(ip, port);
+                        Connection = new HttpConnection(ip, port, httpRelativeAddress ?? throw new Exception("Missing httpRelativeAddress for HTTP connection"));
                         break;
                     case Protocol.WEBSOCKET:
                         Connection = new WebSocketConnection(ip, port);
