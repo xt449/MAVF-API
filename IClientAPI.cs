@@ -2,6 +2,6 @@
 {
     public interface IClientAPI
     {
-        public void AckSetControlState(string state);
+        public void AckSetMode(string mode);
     }
 }

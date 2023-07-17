@@ -6,7 +6,7 @@ namespace MILAV.API.Device.Routing
     {
         public string Id { get; init; }
 
-        public IOType Type { get; init; }
+        public IOType Type { get; init; } /*= IOType.Video;*/
 
         public string Group { get; init; }
 

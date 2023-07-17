@@ -13,28 +13,30 @@ namespace MILAV.API
         [JsonProperty(Required = Required.Always)]
         public readonly Dictionary<string, IDevice> devices;
 
-        [JsonConverter(typeof(IdentifiableCollectionToDictionaryConverter<User>))]
+		[JsonProperty(Required = Required.Always)]
+		public readonly List<string> modes;
+
+		[JsonProperty(Required = Required.Always)]
+		public readonly string defaultModeId;
+
+		[JsonConverter(typeof(IdentifiableCollectionToDictionaryConverter<User>))]
         [JsonProperty(Required = Required.Always)]
         public readonly Dictionary<string, User> users;
 
         [JsonProperty(Required = Required.Always)]
-        public readonly string masterUser;
+        public readonly string masterUserId;
 
-        [JsonConverter(typeof(IdentifiableCollectionToDictionaryConverter<ControlState>))]
-        [JsonProperty(Required = Required.Always)]
-        public readonly Dictionary<string, ControlState> states;
-
-        [JsonProperty(Required = Required.Always)]
-        public readonly string defaultState;
-
-        public Configuration(string defaultState)
+        public Configuration()
         {
             this.debug = true;
+
             this.devices = new Dictionary<string, IDevice>();
-            this.users = new Dictionary<string, User>();
-            this.masterUser = string.Empty;
-            this.states = new Dictionary<string, ControlState>();
-            this.defaultState = defaultState;
+
+			this.modes = new List<string>();
+			this.defaultModeId = string.Empty;
+
+			this.users = new Dictionary<string, User>();
+            this.masterUserId = string.Empty;
         }
     }
 }

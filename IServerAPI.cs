@@ -14,13 +14,13 @@ namespace MILAV.API
 
         public IDevice? GetDeviceById(string deviceId);
 
-        // ControlState
+        // Mode
 
-        public ControlState GetControlState();
+        public string GetMode();
 
-        public void SetControlState(string state);
+        public void SetMode(string mode);
 
-        public void ResetControlState();
+        public void ResetMode();
 
         // Routing
 
