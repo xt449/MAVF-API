@@ -2,8 +2,8 @@
 
 namespace MILAV.API.Device.USB
 {
-    public interface IUSBControl<I, O> : IRouteControl<I, O> where I : IInputOutput where O : IInputOutput
-    {
+	public interface IUSBControl<I, O> : IRouteControl<I, O> where I : IInputOutput where O : IInputOutput
+	{
 
-    }
+	}
 }

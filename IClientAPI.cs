@@ -1,7 +1,7 @@
 ﻿namespace MILAV.API
 {
-    public interface IClientAPI
-    {
-        public void AckSetMode(string mode);
-    }
+	public interface IClientAPI
+	{
+		public void AckSetMode(string mode);
+	}
 }

@@ -1,41 +1,41 @@
 ﻿namespace MILAV.API.Device.TVTuner
 {
-    public interface IRemoteControl : IPowerControl
-    {
-        public virtual void PowerOn()
-        {
-            SetPower(true);
-        }
+	public interface IRemoteControl : IPowerControl
+	{
+		public virtual void PowerOn()
+		{
+			SetPower(true);
+		}
 
-        public virtual void PowerOff()
-        {
-            SetPower(false);
-        }
+		public virtual void PowerOff()
+		{
+			SetPower(false);
+		}
 
-        public void ArrowUp();
+		public void ArrowUp();
 
-        public void ArrowDown();
+		public void ArrowDown();
 
-        public void ArrowLeft();
+		public void ArrowLeft();
 
-        public void ArrowRight();
+		public void ArrowRight();
 
-        public void Enter();
+		public void Enter();
 
-        public void Exit();
+		public void Exit();
 
-        public void Back();
+		public void Back();
 
-        public void Guide();
+		public void Guide();
 
-        public void Menu();
+		public void Menu();
 
-        public void ChannelUp();
+		public void ChannelUp();
 
-        public void ChannelDown();
+		public void ChannelDown();
 
-        public void VolumeUp();
+		public void VolumeUp();
 
-        public void VolumeDown();
-    }
+		public void VolumeDown();
+	}
 }

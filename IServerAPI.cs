@@ -4,50 +4,50 @@ using MILAV.API.Layout;
 
 namespace MILAV.API
 {
-    public interface IServerAPI
-    {
-        // Devices
+	public interface IServerAPI
+	{
+		// Devices
 
-        public IEnumerable<IDevice> GetDevices();
+		public IEnumerable<IDevice> GetDevices();
 
-        // Device
+		// Device
 
-        public IDevice? GetDeviceById(string deviceId);
+		public IDevice? GetDeviceById(string deviceId);
 
-        // Mode
+		// Mode
 
-        public string GetMode();
+		public string GetMode();
 
-        public void SetMode(string mode);
+		public void SetMode(string mode);
 
-        public void ResetMode();
+		public void ResetMode();
 
-        // Routing
+		// Routing
 
-        public IEnumerable<IInputOutput>? GetDeviceInputsById(string deviceId);
+		public IEnumerable<IInputOutput>? GetDeviceInputsById(string deviceId);
 
-        public IEnumerable<IInputOutput>? GetDeviceOutputsById(string deviceId);
+		public IEnumerable<IInputOutput>? GetDeviceOutputsById(string deviceId);
 
-        public bool TrySetRoute(string deviceId, IInputOutput input, IInputOutput output);
+		public bool TrySetRoute(string deviceId, IInputOutput input, IInputOutput output);
 
-        public IInputOutput? GetRoute(string deviceId, IInputOutput output);
+		public IInputOutput? GetRoute(string deviceId, IInputOutput output);
 
-        // Layout
+		// Layout
 
-        public bool TrySetLayout(string deviceId, ILayout layout);
+		public bool TrySetLayout(string deviceId, ILayout layout);
 
-        public ILayout? GetLayout(string deviceId);
+		public ILayout? GetLayout(string deviceId);
 
-        // TVTuner
+		// TVTuner
 
-        public bool TrySetChannel(string deviceId, string channel);
+		public bool TrySetChannel(string deviceId, string channel);
 
-        public string? GetChannel(string deviceId);
+		public string? GetChannel(string deviceId);
 
-        // PDU
+		// PDU
 
-        public bool TryTurnPowerOn(string deviceId, int port);
+		public bool TryTurnPowerOn(string deviceId, int port);
 
-        public bool TryTurnPowerOff(string deviceId, int port);
-    }
+		public bool TryTurnPowerOff(string deviceId, int port);
+	}
 }

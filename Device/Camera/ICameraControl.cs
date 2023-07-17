@@ -1,21 +1,21 @@
 ﻿namespace MILAV.API.Device.Camera
 {
-    public interface ICameraControl
-    {
-        public void PanUp();
+	public interface ICameraControl
+	{
+		public void PanUp();
 
-        public void PanDown();
+		public void PanDown();
 
-        public void PanLeft();
+		public void PanLeft();
 
-        public void PanRight();
+		public void PanRight();
 
-        public void ZoomIn();
+		public void ZoomIn();
 
-        public void ZoomOut();
+		public void ZoomOut();
 
-        public void OpenLens();
+		public void OpenLens();
 
-        public void CloseLens();
-    }
+		public void CloseLens();
+	}
 }
