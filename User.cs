@@ -12,7 +12,7 @@ namespace MILAV.API
 		public string Id { get; init; }
 
 		[JsonProperty("modeGroups", Required = Required.Always)]
-		public Dictionary<string, string[]> ModeGroups { get; init; }
+		public readonly Dictionary<string, string[]> modeGroups;
 
 		/// <summary>
 		/// Groups that can be controlled
@@ -21,7 +21,7 @@ namespace MILAV.API
 
 		public void UpdateMode(string mode)
 		{
-			controlGroups = ModeGroups[mode] ?? Array.Empty<string>();
+			controlGroups = modeGroups[mode] ?? Array.Empty<string>();
 		}
 
 		public bool CanRouteInput(IInputOutput input)
