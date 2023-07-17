@@ -4,7 +4,7 @@ using Newtonsoft.Json;
 namespace MILAV.API
 {
     /// <summary>
-    /// Touchpanel interface
+    /// Physical interface
     /// </summary>
     public class User : IIdentifiable
     {
