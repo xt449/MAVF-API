@@ -1,4 +1,4 @@
-﻿namespace MILAV.API.Device.Codec
+﻿namespace MAVF.API.Device.Codec
 {
 	public interface ICodecControl
 	{

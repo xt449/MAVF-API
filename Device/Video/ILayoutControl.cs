@@ -1,6 +1,6 @@
-﻿using MILAV.API.Layout;
+﻿using MAVF.API.Layout;
 
-namespace MILAV.API.Device.Video
+namespace MAVF.API.Device.Video
 {
 	public interface ILayoutControl
 	{

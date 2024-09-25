@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 
-namespace MILAV.API.Device.PDU
+namespace MAVF.API.Device.PDU
 {
 	/// <summary>
 	/// This interfaces funcationilty may be built into instances of IDevice later

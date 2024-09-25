@@ -1,4 +1,4 @@
-﻿namespace MILAV.API.Device.Shade
+﻿namespace MAVF.API.Device.Shade
 {
 	public interface IShadeControl
 	{

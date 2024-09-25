@@ -1,4 +1,4 @@
-﻿namespace MILAV.API.Device.Camera
+﻿namespace MAVF.API.Device.Camera
 {
 	public interface ICameraControl
 	{

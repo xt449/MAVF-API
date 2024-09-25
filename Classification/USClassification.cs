@@ -1,4 +1,4 @@
-﻿namespace MILAV.API.Classification
+﻿namespace MAVF.API.Classification
 {
 	public enum USClassification
 	{

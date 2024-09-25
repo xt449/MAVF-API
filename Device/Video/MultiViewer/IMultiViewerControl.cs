@@ -1,4 +1,4 @@
-﻿namespace MILAV.API.Device.Video.MultiViewer
+﻿namespace MAVF.API.Device.Video.MultiViewer
 {
 	[Obsolete("Unimplemented")]
 	public interface IMultiViewerControl : ILayoutControl

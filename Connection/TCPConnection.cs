@@ -1,6 +1,6 @@
 ﻿using System.Net.Sockets;
 
-namespace MILAV.API.Connection
+namespace MAVF.API.Connection
 {
 	//[JsonObject("tcp")]
 	public class TCPConnection : NetworkConnection

@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 
-namespace MILAV.API
+namespace MAVF.API
 {
 	[JsonObject(MemberSerialization.OptIn)]
 	public interface IIdentifiable

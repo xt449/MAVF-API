@@ -1,7 +1,7 @@
 ﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
-namespace MILAV.API.Connection
+namespace MAVF.API.Connection
 {
 	[JsonConverter(typeof(ProtocolConverter))]
 	public enum Protocol

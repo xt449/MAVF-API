@@ -1,8 +1,8 @@
-﻿using MILAV.API.Device;
-using MILAV.API.Device.Routing;
-using MILAV.API.Layout;
+﻿using MAVF.API.Device;
+using MAVF.API.Device.Routing;
+using MAVF.API.Layout;
 
-namespace MILAV.API
+namespace MAVF.API
 {
 	public interface IServerAPI
 	{

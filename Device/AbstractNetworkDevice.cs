@@ -1,7 +1,7 @@
-﻿using MILAV.API.Connection;
+﻿using MAVF.API.Connection;
 using Newtonsoft.Json;
 
-namespace MILAV.API.Device
+namespace MAVF.API.Device
 {
 	public abstract class AbstractNetworkDevice : IDevice
 	{

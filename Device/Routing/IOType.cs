@@ -1,4 +1,4 @@
-﻿namespace MILAV.API.Device.Routing
+﻿namespace MAVF.API.Device.Routing
 {
 	[Flags]
 	public enum IOType

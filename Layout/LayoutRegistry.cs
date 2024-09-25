@@ -1,4 +1,4 @@
-﻿namespace MILAV.API.Layout
+﻿namespace MAVF.API.Layout
 {
 	public class LayoutRegistry
 	{

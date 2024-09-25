@@ -2,7 +2,7 @@
 using System.Collections.Concurrent;
 using System.Text;
 
-namespace MILAV.API.Connection
+namespace MAVF.API.Connection
 {
 	internal class SSHConnection : NetworkConnection
 	{

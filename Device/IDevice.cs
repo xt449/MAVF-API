@@ -1,7 +1,7 @@
 ﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
-namespace MILAV.API.Device
+namespace MAVF.API.Device
 {
 	[JsonConverter(typeof(DeviceConverter))]
 	[JsonObject(MemberSerialization.OptIn)]

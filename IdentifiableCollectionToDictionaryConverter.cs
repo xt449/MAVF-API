@@ -1,7 +1,7 @@
 ﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
-namespace MILAV.API
+namespace MAVF.API
 {
 	public class IdentifiableCollectionToDictionaryConverter<T> : JsonConverter where T : IIdentifiable
 	{

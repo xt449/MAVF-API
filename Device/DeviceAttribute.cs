@@ -1,4 +1,4 @@
-﻿namespace MILAV.API.Device
+﻿namespace MAVF.API.Device
 {
 	[AttributeUsage(AttributeTargets.Class, AllowMultiple = false, Inherited = false)]
 	public class DeviceAttribute : Attribute

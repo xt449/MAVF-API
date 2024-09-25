@@ -1,4 +1,4 @@
-﻿namespace MILAV.API.Device.TVTuner
+﻿namespace MAVF.API.Device.TVTuner
 {
 	public interface IRemoteControl : IPowerControl
 	{

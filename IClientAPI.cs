@@ -1,4 +1,4 @@
-﻿namespace MILAV.API
+﻿namespace MAVF.API
 {
 	public interface IClientAPI
 	{

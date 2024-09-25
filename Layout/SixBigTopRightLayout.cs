@@ -1,6 +1,6 @@
-﻿using MILAV.Data;
+﻿using MAVF.Data;
 
-namespace MILAV.API.Layout
+namespace MAVF.API.Layout
 {
 	public class SixBigTopRightLayout : ILayout
 	{

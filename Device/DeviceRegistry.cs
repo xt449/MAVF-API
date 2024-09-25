@@ -1,6 +1,6 @@
 ﻿using System.Diagnostics;
 
-namespace MILAV.API.Device
+namespace MAVF.API.Device
 {
 	public class DeviceRegistry
 	{

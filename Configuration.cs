@@ -1,7 +1,7 @@
-﻿using MILAV.API.Device;
+﻿using MAVF.API.Device;
 using Newtonsoft.Json;
 
-namespace MILAV.API
+namespace MAVF.API
 {
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public class Configuration

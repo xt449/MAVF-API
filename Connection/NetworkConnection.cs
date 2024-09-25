@@ -1,6 +1,6 @@
 ﻿using System.Text;
 
-namespace MILAV.API.Connection
+namespace MAVF.API.Connection
 {
 	public abstract class NetworkConnection : IDisposable
 	{

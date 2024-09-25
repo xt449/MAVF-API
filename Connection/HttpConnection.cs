@@ -1,4 +1,4 @@
-﻿namespace MILAV.API.Connection
+﻿namespace MAVF.API.Connection
 {
 	internal class HttpConnection : NetworkConnection
 	{

@@ -1,6 +1,6 @@
-﻿using MILAV.API.Layout;
+﻿using MAVF.API.Layout;
 
-namespace MILAV.API.Device.Video.VideoWall
+namespace MAVF.API.Device.Video.VideoWall
 {
 	public interface IWallLayoutControl
 	{

@@ -1,7 +1,7 @@
-﻿using MILAV.API.Device.Routing;
+﻿using MAVF.API.Device.Routing;
 using Newtonsoft.Json;
 
-namespace MILAV.API
+namespace MAVF.API
 {
 	/// <summary>
 	/// Physical interface

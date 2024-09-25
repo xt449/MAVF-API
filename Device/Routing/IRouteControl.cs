@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 
-namespace MILAV.API.Device.Routing
+namespace MAVF.API.Device.Routing
 {
 	public interface IRouteControl<I, O> where I : IInputOutput where O : IInputOutput
 	{

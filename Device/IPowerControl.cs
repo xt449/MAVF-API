@@ -1,4 +1,4 @@
-﻿namespace MILAV.API.Device
+﻿namespace MAVF.API.Device
 {
 	public interface IPowerControl
 	{

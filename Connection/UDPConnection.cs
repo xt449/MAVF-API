@@ -1,7 +1,7 @@
 ﻿using System.Net;
 using System.Net.Sockets;
 
-namespace MILAV.API.Connection
+namespace MAVF.API.Connection
 {
 	internal class UDPConnection : NetworkConnection
 	{
