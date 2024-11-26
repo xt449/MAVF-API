@@ -3,13 +3,13 @@ using System.Net.Sockets;
 
 namespace MAVF.API.Connection
 {
-	internal class UDPConnection : NetworkConnection
+	internal class RawUDPConnection : NetworkConnection
 	{
 		private readonly UdpClient client;
 
 		private IPEndPoint remoteEndPoint;
 
-		public UDPConnection(string ip, int port) : base(ip, port)
+		public RawUDPConnection(string ip, int port) : base(ip, port)
 		{
 			client = new UdpClient();
 			remoteEndPoint = new IPEndPoint(IPAddress.Parse(ip), port);

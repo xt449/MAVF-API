@@ -35,7 +35,7 @@ namespace MAVF.API.Device
 				switch (protocol)
 				{
 					case Protocol.TCP:
-						Connection = new TCPConnection(ip, port);
+						Connection = new RawTCPConnection(ip, port);
 						break;
 					case Protocol.TELNET:
 						Connection = new TelnetConnection(ip, port);
@@ -53,7 +53,7 @@ namespace MAVF.API.Device
 						Connection = new SSHConnection(ip, port, username ?? throw new Exception("Missing username for SSH connection"), password ?? throw new Exception("Missing password for SSH connection"));
 						break;
 					case Protocol.UDP:
-						Connection = new UDPConnection(ip, port);
+						Connection = new RawUDPConnection(ip, port);
 						break;
 				}
 			}

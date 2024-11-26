@@ -3,13 +3,13 @@
 namespace MAVF.API.Connection
 {
 	//[JsonObject("tcp")]
-	public class TCPConnection : NetworkConnection
+	public class RawTCPConnection : NetworkConnection
 	{
 		protected readonly TcpClient client;
 
 		public bool Connected => client.Connected;
 
-		public TCPConnection(string ip, int port) : base(ip, port)
+		public RawTCPConnection(string ip, int port) : base(ip, port)
 		{
 			client = new TcpClient();
 		}
