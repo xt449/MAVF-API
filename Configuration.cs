@@ -9,7 +9,7 @@ namespace MAVF.API
 		[JsonProperty(Required = Required.Always)]
 		public readonly bool debug;
 
-		[JsonConverter(typeof(IdentifiableCollectionToDictionaryConverter<IDevice>))]
+		[JsonConverter(typeof(JArrayDictionaryConverter<IDevice>))]
 		[JsonProperty(Required = Required.Always)]
 		public readonly Dictionary<string, IDevice> devices;
 
@@ -19,9 +19,9 @@ namespace MAVF.API
 		[JsonProperty(Required = Required.Always)]
 		public readonly string defaultModeId;
 
-		[JsonConverter(typeof(IdentifiableCollectionToDictionaryConverter<User>))]
+		[JsonConverter(typeof(JArrayDictionaryConverter<UserInterface>))]
 		[JsonProperty(Required = Required.Always)]
-		public readonly Dictionary<string, User> users;
+		public readonly Dictionary<string, UserInterface> users;
 
 		[JsonProperty(Required = Required.Always)]
 		public readonly string masterUserId;
@@ -35,7 +35,7 @@ namespace MAVF.API
 			this.modes = new List<string>();
 			this.defaultModeId = string.Empty;
 
-			this.users = new Dictionary<string, User>();
+			this.users = new Dictionary<string, UserInterface>();
 			this.masterUserId = string.Empty;
 		}
 	}

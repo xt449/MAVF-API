@@ -1,12 +1,13 @@
 ﻿using MAVF.API.Device.Routing;
 using Newtonsoft.Json;
+using System.Collections.Immutable;
 
 namespace MAVF.API
 {
 	/// <summary>
 	/// Physical interface
 	/// </summary>
-	public class User : IIdentifiable
+	public class UserInterface : IIdentifiable
 	{
 		[JsonProperty("ip", Required = Required.Always)]
 		public string Id { get; init; }

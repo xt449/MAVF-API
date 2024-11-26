@@ -1,8 +1,9 @@
 ﻿using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
 
 namespace MAVF.API.Device
 {
-	public class DeviceRegistry
+	public static class DeviceRegistry
 	{
 		private static readonly Dictionary<string, Type> deviceDriverToType = new Dictionary<string, Type>();
 
@@ -31,7 +32,7 @@ namespace MAVF.API.Device
 			}
 		}
 
-		public static bool TryGet(string driver, out Type o)
+		public static bool TryGet(string driver, [MaybeNullWhen(false)] out Type o)
 		{
 			Initialize();
 

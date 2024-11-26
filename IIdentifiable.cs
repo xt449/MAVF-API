@@ -6,6 +6,6 @@ namespace MAVF.API
 	public interface IIdentifiable
 	{
 		[JsonProperty("id", Required = Required.Always)]
-		public string Id { get; init; }
+		public string Id { get; }
 	}
 }

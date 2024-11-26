@@ -1,4 +1,6 @@
-﻿namespace MAVF.API.Layout
+﻿using System.Diagnostics.CodeAnalysis;
+
+namespace MAVF.API.Layout
 {
 	public class LayoutRegistry
 	{
@@ -24,7 +26,7 @@
 			return true;
 		}
 
-		public bool TryGet(string layout, out ILayout o)
+		public bool TryGet(string layout, [MaybeNullWhen(false)] out ILayout o)
 		{
 			return layouts.TryGetValue(layout, out o);
 		}
