@@ -1,42 +1,63 @@
-﻿using MAVF.API.Device;
-using Newtonsoft.Json;
+﻿using MAVF.API.Device.Driver;
+using System.Diagnostics.CodeAnalysis;
+using System.Text.Json.Serialization;
 
 namespace MAVF.API
 {
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public class Configuration
 	{
-		[JsonProperty(Required = Required.Always)]
-		public readonly bool debug;
+		[JsonPropertyName("debug")]
+		public required bool Debug { get; init; }
 
-		[JsonConverter(typeof(JArrayDictionaryConverter<IDevice>))]
-		[JsonProperty(Required = Required.Always)]
-		public readonly Dictionary<string, IDevice> devices;
+		[JsonConverter(typeof(JArrayDictionaryConverter<Device.Device>))]
+		[JsonPropertyName("devices")]
+		public required Dictionary<string, Device.Device> Devices { get; init; }
 
-		[JsonProperty(Required = Required.Always)]
-		public readonly List<string> modes;
+		[JsonPropertyName("modes")]
+		public required List<string> Modes { get; init; }
 
-		[JsonProperty(Required = Required.Always)]
-		public readonly string defaultModeId;
+		[JsonPropertyName("defaultModeId")]
+		public required string DefaultModeId { get; init; }
 
 		[JsonConverter(typeof(JArrayDictionaryConverter<UserInterface>))]
-		[JsonProperty(Required = Required.Always)]
-		public readonly Dictionary<string, UserInterface> users;
+		[JsonPropertyName("users")]
+		public required Dictionary<string, UserInterface> Users { get; init; }
 
-		[JsonProperty(Required = Required.Always)]
-		public readonly string masterUserId;
+		[JsonPropertyName("masterUserId")]
+		public required string MasterUserId { get; init; }
 
+		[SetsRequiredMembers]
 		public Configuration()
 		{
-			this.debug = true;
+			Debug = true;
 
-			this.devices = new Dictionary<string, IDevice>();
+			Devices = new()
+			{
+				["example"] = new Device.Device()
+				{
+					Id = "example",
+					Driver = new TestDriver(new TestDriver.DriverProperties()
+					{
+						Example = 12
+					})
+				}
+			};
 
-			this.modes = new List<string>();
-			this.defaultModeId = string.Empty;
+			Modes =
+			[
+				"mode0"
+			];
+			DefaultModeId = "mode0";
 
-			this.users = new Dictionary<string, UserInterface>();
-			this.masterUserId = string.Empty;
+			Users = new Dictionary<string, UserInterface>()
+			{
+				["172.16.0.11"] = new UserInterface()
+				{
+					Id = "172.16.0.11",
+					ModeGroups = []
+				}
+			};
+			MasterUserId = "172.16.0.11";
 		}
 	}
 }
