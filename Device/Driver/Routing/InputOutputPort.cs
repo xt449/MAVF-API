@@ -2,7 +2,7 @@
 
 namespace MAVF.API.Device.Driver.Routing
 {
-	public class InputOutputPort : IInputOutput
+	public record InputOutputPort : IInputOutput
 	{
 		[JsonPropertyName("id")]
 		public required string Id { get; init; }

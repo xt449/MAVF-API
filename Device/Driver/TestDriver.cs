@@ -9,7 +9,7 @@ namespace MAVF.API.Device.Driver
 	{
 		// Map property name for JsonSerializer
 		[JsonPropertyName("properties")]
-		public required DriverProperties Properties { get; init; }
+		public DriverProperties Properties { get; private init; }
 
 		// Map constructor for JsonSerializer
 		[JsonConstructor]

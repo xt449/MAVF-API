@@ -1,6 +1,4 @@
-﻿using System.Text.Json.Serialization;
-
-namespace MAVF.API.Device.Driver.PDU
+﻿namespace MAVF.API.Device.Driver.PDU
 {
 	/// <summary>
 	/// This interfaces funcationilty may be built into instances of IDevice later
@@ -15,7 +13,6 @@ namespace MAVF.API.Device.Driver.PDU
 		/// Key: Device#Id
 		/// Value: Port
 		/// </summary>
-		[JsonPropertyName("ports")]
-		public Dictionary<string, int> Ports { get; init; }
+		public Dictionary<string, int> Ports { get; }
 	}
 }

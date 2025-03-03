@@ -1,14 +1,10 @@
-﻿using System.Text.Json.Serialization;
-
-namespace MAVF.API.Device.Driver.Routing
+﻿namespace MAVF.API.Device.Driver.Routing
 {
 	public interface IRouteControl<I, O> where I : IInputOutput where O : IInputOutput
 	{
-		[JsonPropertyName("inputs")]
-		public Dictionary<string, I> Inputs { get; init; }
+		public Dictionary<string, I> Inputs { get; }
 
-		[JsonPropertyName("outputs")]
-		public Dictionary<string, O> Outputs { get; init; }
+		public Dictionary<string, O> Outputs { get; }
 
 		protected Dictionary<O, I> Routes { get; }
 
@@ -30,7 +26,7 @@ namespace MAVF.API.Device.Driver.Routing
 
 		public virtual I? GetRoute(O output)
 		{
-			return Routes[output];
+			return Routes.GetValueOrDefault(output);
 		}
 	}
 }

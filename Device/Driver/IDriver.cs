@@ -6,16 +6,16 @@ namespace MAVF.API.Device.Driver
 	[JsonConverter(typeof(DriverConverter))]
 	public interface IDriver
 	{
-		public sealed string Type => ((DriverAttribute?)Attribute.GetCustomAttribute(GetType(), typeof(DriverAttribute), false))?.driver ?? "unknown";
+		sealed string Type => ((DriverAttribute?)Attribute.GetCustomAttribute(GetType(), typeof(DriverAttribute), false))?.driver ?? "unknown";
 
-		public object? Properties { get; }
+		object? Properties { get; }
 	}
 
-	public interface IDriver<DriverProperties> : IDriver
+	public interface IDriver<DriverProperties> : IDriver where DriverProperties : notnull
 	{
 		object? IDriver.Properties => Properties;
 
-		public new DriverProperties Properties { get; init; }
+		new DriverProperties Properties { get; }
 	}
 
 	public class DriverConverter : JsonConverter<IDriver>
