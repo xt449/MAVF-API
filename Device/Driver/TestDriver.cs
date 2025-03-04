@@ -13,8 +13,6 @@ namespace MAVF.API.Device.Driver
 
 		// Map constructor for JsonSerializer
 		[JsonConstructor]
-		// Allow direct instantiation of type (debug only)
-		[SetsRequiredMembers]
 		public TestDriver(DriverProperties properties)
 		{
 			// Ensure that value from JsonSerializer is not null
