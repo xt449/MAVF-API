@@ -14,7 +14,7 @@ namespace MAVF.API.Device.Driver
 			// For each type that is castable to IDevice 
 			foreach (var type in AppDomain.CurrentDomain.GetAssemblies().SelectMany(assembly => assembly.GetTypes()).Where(type => typeof(IDriver).IsAssignableFrom(type) && !type.IsAbstract))
 			{
-				var attribute = (DriverAttribute?)Attribute.GetCustomAttribute(type, typeof(DriverAttribute));
+				var attribute = (DriverAttribute?)Attribute.GetCustomAttribute(type, typeof(DriverAttribute), false);
 				// True for types that have the DeviceAttribute
 				if (attribute != null)
 				{
