@@ -36,9 +36,12 @@ namespace MAVF.API
 				["example"] = new Device.Device()
 				{
 					Id = "example",
-					Driver = new TestDriver(new TestDriver.DriverProperties()
+					Driver = new ExampleDriver(new ExampleDriver.DriverProperties()
 					{
-						Example = 12
+						Protocol = Connection.Protocol.TCP,
+						Ip = "172.16.0.23",
+						Port = 22,
+						Example = "blah"
 					})
 				}
 			};
