@@ -1,5 +1,4 @@
-﻿using MAVF.API.Device;
-using MAVF.API.Device.Routing;
+﻿using MAVF.API.Device.Driver.Routing;
 using MAVF.API.Layout;
 
 namespace MAVF.API
@@ -8,11 +7,11 @@ namespace MAVF.API
 	{
 		// Devices
 
-		public IEnumerable<IDevice> GetDevices();
+		public IEnumerable<Device.Device> GetDevices();
 
 		// Device
 
-		public IDevice? GetDeviceById(string deviceId);
+		public Device.Device? GetDeviceById(string deviceId);
 
 		// Mode
 

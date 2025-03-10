@@ -1,5 +1,5 @@
-﻿using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
+﻿using System.Text.Json;
+using System.Text.Json.Serialization;
 
 namespace MAVF.API.Connection
 {
@@ -9,28 +9,25 @@ namespace MAVF.API.Connection
 		TCP, TELNET, HTTP, HTTPS, WEBSOCKET, SSH, UDP
 	}
 
-	internal class ProtocolConverter : JsonConverter
+	internal class ProtocolConverter : JsonConverter<Protocol>
 	{
-		public override bool CanConvert(Type objectType)
+		public override Protocol Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 		{
-			return typeof(Protocol) == objectType;
-		}
+			var rootElement = JsonElement.ParseValue(ref reader);
 
-		public override object? ReadJson(JsonReader reader, Type objectType, object? existingValue, JsonSerializer serializer)
-		{
-			var value = (string?)JToken.ReadFrom(reader);
-			return value == null ? null : Enum.Parse(typeof(Protocol), value, true);
-		}
+			var stringValue = rootElement.GetString();
 
-		public override void WriteJson(JsonWriter writer, object? value, JsonSerializer serializer)
-		{
-			if (value == null)
+			if (!Enum.TryParse<Protocol>(stringValue, out var value))
 			{
-				writer.WriteNull();
-				return;
+				throw new Exception("Unable to deserialize protocol. Invalid element value.");
 			}
 
-			writer.WriteValue(Enum.GetName(typeof(Protocol), value));
+			return value;
+		}
+
+		public override void Write(Utf8JsonWriter writer, Protocol value, JsonSerializerOptions options)
+		{
+			writer.WriteStringValue(value.ToString());
 		}
 	}
 }

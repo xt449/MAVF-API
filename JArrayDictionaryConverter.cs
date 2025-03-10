@@ -1,42 +1,40 @@
-﻿using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
+﻿using System.Text.Json;
+using System.Text.Json.Serialization;
 
 namespace MAVF.API
 {
-	public class JArrayDictionaryConverter<T> : JsonConverter where T : IIdentifiable
+	public class JArrayDictionaryConverter<T> : JsonConverter<Dictionary<string, T>> where T : IIdentifiable
 	{
-		public override bool CanConvert(Type objectType)
+		public override bool CanConvert(Type typeToConvert)
 		{
-			return typeof(Dictionary<string, T>).IsAssignableFrom(objectType);
+			return typeof(Dictionary<string, T>).IsAssignableFrom(typeToConvert);
 		}
 
-		public override object? ReadJson(JsonReader reader, Type objectType, object? existingValue, JsonSerializer serializer)
+		public override Dictionary<string, T> Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 		{
-			// Read JSON Array
-			return JArray.Load(reader)
+			var rootElement = JsonElement.ParseValue(ref reader);
+
+			if (rootElement.ValueKind != JsonValueKind.Array)
+			{
+				throw new JsonException($"Unable to deserialize {typeof(T)}. Invalid value type.");
+			}
+
+			return rootElement.EnumerateArray()
 				// Deserialize each element of array
-				.Select(jToken => jToken.ToObject<T>() ?? throw new JsonSerializationException($"Unable to deserialize {typeof(T)} (object is null)"))
+				.Select(element => JsonSerializer.Deserialize<T>(element) ?? throw new JsonException($"Unable to deserialize {typeof(T)}. Array element is null."))
 				// Convert to dictionary
-				.ToDictionary(tObject => tObject.Id);
+				.ToDictionary(idObject => idObject.Id);
 		}
 
-		public override void WriteJson(JsonWriter writer, object? value, JsonSerializer serializer)
+		public override void Write(Utf8JsonWriter writer, Dictionary<string, T> value, JsonSerializerOptions options)
 		{
 			if (value == null)
 			{
-				writer.WriteNull();
+				writer.WriteNullValue();
 				return;
 			}
 
-			// Ensure value is a Disctionary of string to T
-			if (value is not Dictionary<string, T> castValue)
-			{
-				throw new JsonSerializationException($"Unable to serialize {value.GetType()}");
-			}
-
-			// Get value set from dictionary and order by id
-			// Serialize to writer
-			serializer.Serialize(writer, castValue.Values.OrderBy(tObject => tObject.Id));
+			JsonSerializer.Serialize(writer, value.Values.OrderBy(tObject => tObject.Id), options);
 		}
 	}
 }

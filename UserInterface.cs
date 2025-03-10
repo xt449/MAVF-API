@@ -1,6 +1,6 @@
-﻿using MAVF.API.Device.Routing;
-using Newtonsoft.Json;
+﻿using MAVF.API.Device.Driver.Routing;
 using System.Collections.Immutable;
+using System.Text.Json.Serialization;
 
 namespace MAVF.API
 {
@@ -9,11 +9,11 @@ namespace MAVF.API
 	/// </summary>
 	public class UserInterface : IIdentifiable
 	{
-		[JsonProperty("ip", Required = Required.Always)]
-		public string Id { get; init; }
+		[JsonPropertyName("ip")]
+		public required string Id { get; init; }
 
-		[JsonProperty("modeGroups", Required = Required.Always)]
-		public readonly Dictionary<string, string[]> modeGroups;
+		[JsonPropertyName("modeGroups")]
+		public required Dictionary<string, string[]> ModeGroups { get; init; }
 
 		/// <summary>
 		/// Groups that can be controlled
@@ -22,7 +22,7 @@ namespace MAVF.API
 
 		public void UpdateMode(string mode)
 		{
-			controlGroups = modeGroups[mode] ?? Array.Empty<string>();
+			controlGroups = ModeGroups.GetValueOrDefault(mode, []);
 		}
 
 		public bool CanRouteInput(IInputOutput input)
