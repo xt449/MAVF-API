@@ -9,7 +9,7 @@ namespace MAVF.API.Device.Driver
 		public DriverProperties Properties { get; private init; }
 
 		[JsonIgnore]
-		public NetworkConnection Connection { get; private init; }
+		protected NetworkConnection Connection { get; private init; }
 
 		public AbstractCommunicationDriver(DriverProperties properties)
 		{
